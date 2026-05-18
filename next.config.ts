@@ -1,8 +1,12 @@
 import type { NextConfig } from "next";
-// @ts-expect-error next-pwa has no types
-import withPWA from "next-pwa";
+import withPWA from "@ducanh2912/next-pwa";
 
-const pwaConfig = withPWA({
+const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  typescript: { ignoreBuildErrors: true },
+};
+
+export default withPWA({
   dest: "public",
   disable: process.env.NODE_ENV === "development",
   register: true,
@@ -10,6 +14,8 @@ const pwaConfig = withPWA({
   fallbacks: {
     document: "/offline",
   },
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
   runtimeCaching: [
     {
       urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/i,
@@ -48,11 +54,4 @@ const pwaConfig = withPWA({
       },
     },
   ],
-});
-
-const nextConfig: NextConfig = {
-  reactStrictMode: true,
-  typescript: { ignoreBuildErrors: true },
-};
-
-export default pwaConfig(nextConfig);
+})(nextConfig);
