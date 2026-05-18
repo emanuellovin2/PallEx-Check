@@ -69,7 +69,7 @@ export function AdminFilterBar({
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Caută..."
             defaultValue={currentSearch}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -99,7 +99,7 @@ export function AdminFilterBar({
               focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent
               hover:border-surface-600 transition-colors cursor-pointer flex-shrink-0 min-w-[130px]"
           >
-            <option value="">All Drivers</option>
+            <option value="">Toți șoferii</option>
             {drivers.map((d) => (
               <option key={d.value} value={d.value}>
                 {d.label}
@@ -117,7 +117,7 @@ export function AdminFilterBar({
               focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent
               hover:border-surface-600 transition-colors cursor-pointer flex-shrink-0 min-w-[130px]"
           >
-            <option value="">All Vehicles</option>
+            <option value="">Toate vehiculele</option>
             {vehicles.map((v) => (
               <option key={v.value} value={v.value}>
                 {v.label}
@@ -135,7 +135,7 @@ export function AdminFilterBar({
               focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent
               hover:border-surface-600 transition-colors cursor-pointer flex-shrink-0 min-w-[120px]"
           >
-            <option value="">All Statuses</option>
+            <option value="">Toate statusurile</option>
             {statusOptions.map((o) => (
               <option key={o.value} value={o.value}>
                 {o.label}
@@ -153,11 +153,11 @@ export function AdminFilterBar({
               focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent
               hover:border-surface-600 transition-colors cursor-pointer flex-shrink-0 min-w-[120px]"
           >
-            <option value="">All Severities</option>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-            <option value="critical">Critical</option>
+            <option value="">Toate severitățile</option>
+            <option value="low">Scăzut</option>
+            <option value="medium">Mediu</option>
+            <option value="high">Ridicat</option>
+            <option value="critical">Critic</option>
           </select>
         )}
 
@@ -170,10 +170,10 @@ export function AdminFilterBar({
               focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent
               hover:border-surface-600 transition-colors cursor-pointer flex-shrink-0 min-w-[150px]"
           >
-            <option value="">All Signals</option>
-            <option value="missing_photos">Missing Photos</option>
-            <option value="late_submissions">Late Submissions</option>
-            <option value="gps_missing">GPS Missing</option>
+            <option value="">Toate semnalele</option>
+            <option value="missing_photos">Poze lipsă</option>
+            <option value="late_submissions">Trimiteri târzii</option>
+            <option value="gps_missing">GPS lipsă</option>
           </select>
         )}
 
@@ -196,7 +196,7 @@ export function AdminFilterBar({
               text-slate-400 hover:text-white text-sm transition-colors flex-shrink-0"
           >
             <X className="w-3.5 h-3.5" />
-            Clear
+            Șterge
           </button>
         )}
       </div>

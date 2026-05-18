@@ -172,7 +172,7 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <h1 className="text-xl font-bold text-white flex items-center gap-2">
-            Checklists
+            Checklist-uri
             {totalFraud > 0 && (
               <Link
                 href="/admin/checklists?fraud=1"
@@ -180,12 +180,12 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
                   text-red-400 text-xs font-semibold hover:bg-red-500/25 transition-colors"
               >
                 <ShieldAlert className="w-3 h-3" />
-                {totalFraud} fraud
+                {totalFraud} fraudă
               </Link>
             )}
           </h1>
           <p className="text-slate-400 text-sm mt-0.5">
-            {filtered.length}{filtered.length !== annotated.length ? ` of ${annotated.length}` : ""} checklists
+            {filtered.length}{filtered.length !== annotated.length ? ` din ${annotated.length}` : ""} checklist-uri
           </p>
         </div>
         <ChecklistsExportWrapper data={exportData} />
@@ -204,7 +204,7 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
                 }`}
             >
               <ImageOff className="w-3 h-3" />
-              {fraudCounts.missingPhotos} missing photos
+              {fraudCounts.missingPhotos} fără poze
             </Link>
           )}
           {fraudCounts.lateSubmissions > 0 && (
@@ -217,7 +217,7 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
                 }`}
             >
               <Clock className="w-3 h-3" />
-              {fraudCounts.lateSubmissions} late submissions
+              {fraudCounts.lateSubmissions} trimiteri târzii
             </Link>
           )}
           {fraudCounts.gpsMissing > 0 && (
@@ -230,7 +230,7 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
                 }`}
             >
               <MapPinOff className="w-3 h-3" />
-              {fraudCounts.gpsMissing} GPS missing
+              {fraudCounts.gpsMissing} GPS lipsă
             </Link>
           )}
         </div>
@@ -244,8 +244,8 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
         showFraud
         showSearch
         statusOptions={[
-          { value: "draft", label: "Draft" },
-          { value: "submitted", label: "Submitted" },
+          { value: "draft", label: "Ciornă" },
+          { value: "submitted", label: "Trimis" },
         ]}
       />
 
@@ -256,8 +256,8 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
             <ClipboardList className="w-7 h-7 text-slate-500" />
           </div>
           <div>
-            <p className="font-medium text-white">No checklists found</p>
-            <p className="text-sm text-slate-400 mt-1">Try adjusting filters</p>
+            <p className="font-medium text-white">Niciun checklist găsit</p>
+            <p className="text-sm text-slate-400 mt-1">Încearcă să ajustezi filtrele</p>
           </div>
         </Card>
       ) : (
@@ -282,19 +282,19 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
                       <span className="text-xs font-medium text-red-400 flex items-center gap-1.5">
                         {c.fraudFlags.missingPhotos && (
                           <>
-                            <ImageOff className="w-3 h-3" /> No photos
+                            <ImageOff className="w-3 h-3" /> Fără poze
                           </>
                         )}
                         {c.fraudFlags.lateSubmission && (
                           <>
                             {c.fraudFlags.missingPhotos && " · "}
-                            <Clock className="w-3 h-3 ml-1" /> Late
+                            <Clock className="w-3 h-3 ml-1" /> Târziu
                           </>
                         )}
                         {c.fraudFlags.gpsMissing && (
                           <>
                             {(c.fraudFlags.missingPhotos || c.fraudFlags.lateSubmission) && " · "}
-                            <MapPinOff className="w-3 h-3 ml-1" /> No GPS
+                            <MapPinOff className="w-3 h-3 ml-1" /> Fără GPS
                           </>
                         )}
                       </span>
@@ -326,7 +326,7 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
                       </div>
                       <p className="text-xs text-slate-400 mt-0.5 truncate">
                         {driver?.full_name ?? driver?.email ?? "—"} ·{" "}
-                        {new Date(c.created_at).toLocaleDateString("en-GB", {
+                        {new Date(c.created_at).toLocaleDateString("ro-RO", {
                           day: "2-digit",
                           month: "short",
                           year: "numeric",
@@ -335,19 +335,19 @@ export default async function AdminChecklistsPage({ searchParams }: PageProps) {
                         } as Intl.DateTimeFormatOptions)}
                       </p>
                       {c.photoCount > 0 && (
-                        <p className="text-xs text-slate-500 mt-0.5">{c.photoCount} photo{c.photoCount !== 1 ? "s" : ""}</p>
+                        <p className="text-xs text-slate-500 mt-0.5">{c.photoCount} {c.photoCount !== 1 ? "poze" : "poză"}</p>
                       )}
                     </div>
 
                     {/* Badges */}
                     <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
                       <Badge variant={isSubmitted ? "success" : "warning"}>
-                        {isSubmitted ? "Submitted" : "Draft"}
+                        {isSubmitted ? "Trimis" : "Ciornă"}
                       </Badge>
                       {c.locked && (
                         <div className="flex items-center gap-1">
                           <Lock className="w-3 h-3 text-slate-500" />
-                          <span className="text-xs text-slate-500">Locked</span>
+                          <span className="text-xs text-slate-500">Blocat</span>
                         </div>
                       )}
                     </div>

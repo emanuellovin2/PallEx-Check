@@ -23,14 +23,14 @@ interface StatusAction {
 const TRANSITIONS: Record<IncidentStatus, StatusAction[]> = {
   open: [
     {
-      label: "Mark as Reviewing",
+      label: "Marchează ca În analiză",
       next: "reviewing",
       icon: Eye,
       className:
         "bg-brand-500/10 border-brand-500/30 text-brand-300 hover:bg-brand-500/20 hover:border-brand-500/50",
     },
     {
-      label: "Mark as Resolved",
+      label: "Marchează ca Rezolvat",
       next: "resolved",
       icon: CheckCircle2,
       className:
@@ -39,14 +39,14 @@ const TRANSITIONS: Record<IncidentStatus, StatusAction[]> = {
   ],
   reviewing: [
     {
-      label: "Mark as Resolved",
+      label: "Marchează ca Rezolvat",
       next: "resolved",
       icon: CheckCircle2,
       className:
         "bg-emerald-500/10 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-500/50",
     },
     {
-      label: "Close Incident",
+      label: "Închide Incidentul",
       next: "closed",
       icon: XCircle,
       className:
@@ -55,14 +55,14 @@ const TRANSITIONS: Record<IncidentStatus, StatusAction[]> = {
   ],
   resolved: [
     {
-      label: "Close Incident",
+      label: "Închide Incidentul",
       next: "closed",
       icon: XCircle,
       className:
         "bg-slate-500/10 border-slate-500/30 text-slate-400 hover:bg-slate-500/20 hover:border-slate-500/50",
     },
     {
-      label: "Reopen",
+      label: "Redeschide",
       next: "open",
       icon: RotateCcw,
       className:
@@ -71,7 +71,7 @@ const TRANSITIONS: Record<IncidentStatus, StatusAction[]> = {
   ],
   closed: [
     {
-      label: "Reopen",
+      label: "Redeschide",
       next: "open",
       icon: RotateCcw,
       className:
@@ -81,10 +81,10 @@ const TRANSITIONS: Record<IncidentStatus, StatusAction[]> = {
 };
 
 const STATUS_LABELS: Record<IncidentStatus, { label: string; className: string }> = {
-  open:      { label: "Open",      className: "bg-red-500/15 border-red-500/30 text-red-400" },
-  reviewing: { label: "Reviewing", className: "bg-brand-500/15 border-brand-500/30 text-brand-300" },
-  resolved:  { label: "Resolved",  className: "bg-emerald-500/15 border-emerald-500/30 text-emerald-400" },
-  closed:    { label: "Closed",    className: "bg-slate-500/15 border-slate-500/30 text-slate-400" },
+  open:      { label: "Deschis",    className: "bg-red-500/15 border-red-500/30 text-red-400" },
+  reviewing: { label: "În analiză", className: "bg-brand-500/15 border-brand-500/30 text-brand-300" },
+  resolved:  { label: "Rezolvat",   className: "bg-emerald-500/15 border-emerald-500/30 text-emerald-400" },
+  closed:    { label: "Închis",     className: "bg-slate-500/15 border-slate-500/30 text-slate-400" },
 };
 
 export function IncidentStatusActions({ incidentId, currentStatus }: Props) {
@@ -105,12 +105,12 @@ export function IncidentStatusActions({ incidentId, currentStatus }: Props) {
         .eq("id", incidentId);
 
       if (error) {
-        toast.error("Failed to update status: " + error.message);
+        toast.error("Eroare la actualizarea statusului: " + error.message);
         return;
       }
 
       setStatus(next);
-      toast.success(`Status updated to "${next}"`);
+      toast.success(`Status actualizat la "${STATUS_LABELS[next].label}"`);
       router.refresh();
     } finally {
       setLoading(null);
@@ -122,7 +122,7 @@ export function IncidentStatusActions({ incidentId, currentStatus }: Props) {
       {/* Current status */}
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-          Status Management
+          Gestionare Status
         </span>
         <span
           className={`px-2.5 py-1 rounded-full border text-xs font-semibold uppercase tracking-wide ${statusInfo.className}`}
@@ -152,7 +152,7 @@ export function IncidentStatusActions({ incidentId, currentStatus }: Props) {
           ))}
         </div>
       ) : (
-        <p className="text-xs text-slate-500">No further actions available.</p>
+        <p className="text-xs text-slate-500">Nu mai sunt acțiuni disponibile.</p>
       )}
     </div>
   );

@@ -36,15 +36,15 @@ export default async function AdminVehiclesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-white">Vehicles</h1>
+          <h1 className="text-xl font-bold text-white">Vehicule</h1>
           <p className="text-slate-400 text-sm mt-0.5">
-            {vehicles?.length ?? 0} vehicle{vehicles?.length !== 1 ? "s" : ""} in fleet
+            {vehicles?.length ?? 0} vehicul{vehicles?.length !== 1 ? "e" : ""} în flotă
           </p>
         </div>
         <Link href="/admin/vehicles/new">
           <Button variant="primary" size="sm" className="gap-2">
             <Plus className="w-4 h-4" />
-            Add Vehicle
+            Adaugă Vehicul
           </Button>
         </Link>
       </div>
@@ -56,13 +56,13 @@ export default async function AdminVehiclesPage() {
             <Truck className="w-7 h-7 text-slate-500" />
           </div>
           <div>
-            <p className="font-medium text-white">No vehicles yet</p>
-            <p className="text-sm text-slate-400 mt-1">Add vehicles to assign to drivers</p>
+            <p className="font-medium text-white">Niciun vehicul înregistrat</p>
+            <p className="text-sm text-slate-400 mt-1">Adaugă vehicule pentru a le aloca șoferilor</p>
           </div>
           <Link href="/admin/vehicles/new">
             <Button variant="primary" size="sm" className="gap-2 mt-2">
               <Plus className="w-4 h-4" />
-              Add Vehicle
+              Adaugă Vehicul
             </Button>
           </Link>
         </Card>
@@ -95,7 +95,7 @@ export default async function AdminVehiclesPage() {
                     )}
                   </div>
                   <Badge variant={driverName ? "success" : "default"}>
-                    {driverName ? "Assigned" : "Available"}
+                    {driverName ? "Alocat" : "Disponibil"}
                   </Badge>
                 </Card>
               </Link>

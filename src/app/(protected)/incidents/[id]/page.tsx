@@ -35,7 +35,7 @@ const statusVariant = (
 };
 
 function fmt(ts: string) {
-  return new Date(ts).toLocaleString("en-GB", {
+  return new Date(ts).toLocaleString("ro-RO", {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -160,7 +160,7 @@ export default async function IncidentDetailPage({
       {incident.locked && (
         <div className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/60 px-4 py-3 text-sm text-slate-400">
           <Lock className="w-4 h-4 text-slate-500 flex-shrink-0" />
-          This report is <span className="text-white font-medium">locked</span> — no further edits are permitted.
+          Acest raport este <span className="text-white font-medium">blocat</span> — nu mai sunt permise modificări.
         </div>
       )}
 
@@ -176,7 +176,7 @@ export default async function IncidentDetailPage({
       {incident.has_damage && (
         <div className="flex items-center gap-2 rounded-xl border border-red-800 bg-red-950/50 px-4 py-3 text-sm text-red-300">
           <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-          Damage reported
+          Daune raportate
         </div>
       )}
 
@@ -184,21 +184,21 @@ export default async function IncidentDetailPage({
       <Card className="flex flex-col gap-4">
         {/* Driver */}
         {isAdmin && driver && (
-          <Row icon={<User className="w-4 h-4" />} label="Driver">
+          <Row icon={<User className="w-4 h-4" />} label="Șofer">
             {driver.full_name} · {driver.email}
           </Row>
         )}
 
         {/* Vehicle */}
         {vehicle && (
-          <Row icon={<AlertTriangle className="w-4 h-4" />} label="Vehicle">
+          <Row icon={<AlertTriangle className="w-4 h-4" />} label="Vehicul">
             {vehicle.plate_number} — {vehicle.model}
           </Row>
         )}
 
         {/* GPS */}
         {incident.gps_lat && incident.gps_lng ? (
-          <Row icon={<MapPin className="w-4 h-4 text-emerald-400" />} label="GPS Location">
+          <Row icon={<MapPin className="w-4 h-4 text-emerald-400" />} label="Locație GPS">
             <a
               href={`https://maps.google.com/?q=${incident.gps_lat},${incident.gps_lng}`}
               target="_blank"
@@ -206,25 +206,25 @@ export default async function IncidentDetailPage({
               className="text-brand-400 underline underline-offset-2 hover:text-brand-300"
             >
               {Number(incident.gps_lat).toFixed(5)},{" "}
-              {Number(incident.gps_lng).toFixed(5)} — Open in Maps
+              {Number(incident.gps_lng).toFixed(5)} — Deschide în Maps
             </a>
           </Row>
         ) : (
-          <Row icon={<MapPin className="w-4 h-4 text-slate-600" />} label="GPS Location">
-            <span className="text-slate-500">Not captured</span>
+          <Row icon={<MapPin className="w-4 h-4 text-slate-600" />} label="Locație GPS">
+            <span className="text-slate-500">Necapturat</span>
           </Row>
         )}
 
         {/* Description */}
         {incident.description && (
-          <Row icon={<Clock className="w-4 h-4" />} label="Description">
+          <Row icon={<Clock className="w-4 h-4" />} label="Descriere">
             <p className="whitespace-pre-wrap">{incident.description}</p>
           </Row>
         )}
 
         {/* Voice transcript */}
         {incident.voice_text && (
-          <Row icon={<Mic className="w-4 h-4 text-brand-400" />} label="Voice Transcript">
+          <Row icon={<Mic className="w-4 h-4 text-brand-400" />} label="Transcriere vocală">
             <p className="italic text-slate-300">&ldquo;{incident.voice_text}&rdquo;</p>
           </Row>
         )}
@@ -235,7 +235,7 @@ export default async function IncidentDetailPage({
         <div className="flex flex-col gap-2">
           <h2 className="text-sm font-semibold text-slate-300 flex items-center gap-2">
             <Camera className="w-4 h-4" />
-            Photos ({photoUrls.length})
+            Fotografii ({photoUrls.length})
           </h2>
           <div className="grid grid-cols-3 gap-2">
             {photoUrls.map(({ id, url }) => (
@@ -249,7 +249,7 @@ export default async function IncidentDetailPage({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={url}
-                  alt="Incident photo"
+                  alt="Fotografie incident"
                   className="w-full h-full object-cover hover:opacity-80 transition-opacity"
                 />
               </a>
@@ -263,7 +263,7 @@ export default async function IncidentDetailPage({
         <div className="flex flex-col gap-2">
           <h2 className="text-sm font-semibold text-slate-300 flex items-center gap-2">
             <Shield className="w-4 h-4 text-slate-400" />
-            Audit Trail
+            Jurnal Audit
           </h2>
           <Card noPadding className="divide-y divide-surface-700">
             {auditLogs.map((log) => (

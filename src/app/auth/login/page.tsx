@@ -22,8 +22,8 @@ export default function LoginPage() {
 
     // Basic validation
     const newErrors: typeof errors = {};
-    if (!email) newErrors.email = "Email is required";
-    if (!password) newErrors.password = "Password is required";
+    if (!email) newErrors.email = "Email-ul este obligatoriu";
+    if (!password) newErrors.password = "Parola este obligatorie";
     if (Object.keys(newErrors).length) {
       setErrors(newErrors);
       return;
@@ -40,7 +40,7 @@ export default function LoginPage() {
       return;
     }
 
-    toast.success("Welcome back!");
+    toast.success("Bine ai revenit!");
     router.push("/dashboard");
     router.refresh();
   }
@@ -60,14 +60,14 @@ export default function LoginPage() {
 
       {/* Card */}
       <div className="w-full max-w-sm bg-surface-900 border border-surface-700 rounded-2xl p-6 shadow-xl">
-        <h2 className="text-xl font-bold text-white mb-1">Sign in</h2>
-        <p className="text-slate-400 text-sm mb-6">Access your fleet dashboard</p>
+        <h2 className="text-xl font-bold text-white mb-1">Autentificare</h2>
+        <p className="text-slate-400 text-sm mb-6">Accesează panoul de control al flotei</p>
 
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <Input
             label="Email"
             type="email"
-            placeholder="you@example.com"
+            placeholder="tu@exemplu.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={errors.email}
@@ -77,7 +77,7 @@ export default function LoginPage() {
           />
 
           <Input
-            label="Password"
+            label="Parolă"
             type="password"
             placeholder="••••••••"
             value={password}
@@ -95,17 +95,17 @@ export default function LoginPage() {
             loading={loading}
             className="mt-2"
           >
-            Sign In
+            Intră în cont
           </Button>
         </form>
 
         <p className="text-center text-sm text-slate-400 mt-5">
-          Don&apos;t have an account?{" "}
+          Nu ai cont?{" "}
           <Link
             href="/auth/register"
             className="text-brand-400 font-medium hover:text-brand-300 transition-colors"
           >
-            Register
+            Înregistrare
           </Link>
         </p>
       </div>

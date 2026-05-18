@@ -30,15 +30,15 @@ export default async function AdminDriversPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-white">Drivers</h1>
+          <h1 className="text-xl font-bold text-white">Șoferi</h1>
           <p className="text-slate-400 text-sm mt-0.5">
-            {drivers?.length ?? 0} driver{drivers?.length !== 1 ? "s" : ""} registered
+            {drivers?.length ?? 0} șofer{drivers?.length !== 1 ? "i" : ""} înregistrat{drivers?.length !== 1 ? "ți" : ""}
           </p>
         </div>
         <Link href="/admin/drivers/new">
           <Button variant="primary" size="sm" className="gap-2">
             <Plus className="w-4 h-4" />
-            Add Driver
+            Adaugă Șofer
           </Button>
         </Link>
       </div>
@@ -50,13 +50,13 @@ export default async function AdminDriversPage() {
             <Users className="w-7 h-7 text-slate-500" />
           </div>
           <div>
-            <p className="font-medium text-white">No drivers yet</p>
-            <p className="text-sm text-slate-400 mt-1">Add your first driver to get started</p>
+            <p className="font-medium text-white">Niciun șofer înregistrat</p>
+            <p className="text-sm text-slate-400 mt-1">Adaugă primul șofer pentru a începe</p>
           </div>
           <Link href="/admin/drivers/new">
             <Button variant="primary" size="sm" className="gap-2 mt-2">
               <Plus className="w-4 h-4" />
-              Add Driver
+              Adaugă Șofer
             </Button>
           </Link>
         </Card>
@@ -89,7 +89,7 @@ export default async function AdminDriversPage() {
                     )}
                   </div>
                   <Badge variant={vehicle ? "success" : "warning"}>
-                    {vehicle ? "Assigned" : "No vehicle"}
+                    {vehicle ? "Alocat" : "Fără vehicul"}
                   </Badge>
                 </Card>
               </Link>
