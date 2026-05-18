@@ -22,8 +22,8 @@ export default function NewVehiclePage() {
     setErrors({});
 
     const newErrors: Record<string, string> = {};
-    if (!plateNumber.trim()) newErrors.plateNumber = "Plate number is required";
-    if (!model.trim()) newErrors.model = "Vehicle model is required";
+    if (!plateNumber.trim()) newErrors.plateNumber = "Numărul de înmatriculare este obligatoriu";
+    if (!model.trim()) newErrors.model = "Modelul vehiculului este obligatoriu";
     if (Object.keys(newErrors).length) {
       setErrors(newErrors);
       return;
@@ -41,14 +41,14 @@ export default function NewVehiclePage() {
 
     if (error) {
       if (error.code === "23505") {
-        toast.error("A vehicle with this plate number already exists");
+        toast.error("Există deja un vehicul cu acest număr de înmatriculare");
       } else {
         toast.error(error.message);
       }
       return;
     }
 
-    toast.success("Vehicle added successfully");
+    toast.success("Vehicul adăugat cu succes");
     router.push("/admin/vehicles");
   }
 
@@ -59,22 +59,22 @@ export default function NewVehiclePage() {
         className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm w-fit"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Vehicles
+        Înapoi la Vehicule
       </Link>
 
       <div>
-        <h1 className="text-xl font-bold text-white">Add Vehicle</h1>
+        <h1 className="text-xl font-bold text-white">Adaugă Vehicul</h1>
         <p className="text-slate-400 text-sm mt-0.5">
-          Register a new vehicle in the fleet.
+          Înregistrează un vehicul nou în flotă.
         </p>
       </div>
 
       <Card className="flex flex-col gap-4">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <Input
-            label="Plate Number"
+            label="Număr înmatriculare"
             type="text"
-            placeholder="ABC 123"
+            placeholder="AB 123 CD"
             value={plateNumber}
             onChange={(e) => setPlateNumber(e.target.value.toUpperCase())}
             error={errors.plateNumber}
@@ -84,9 +84,9 @@ export default function NewVehiclePage() {
           />
 
           <Input
-            label="Vehicle Model"
+            label="Model vehicul"
             type="text"
-            placeholder="e.g. Mercedes Actros 2023"
+            placeholder="ex. Mercedes Actros 2023"
             value={model}
             onChange={(e) => setModel(e.target.value)}
             error={errors.model}
@@ -95,11 +95,11 @@ export default function NewVehiclePage() {
 
           <div className="pt-2 flex flex-col gap-2">
             <Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-              Add Vehicle
+              Adaugă Vehicul
             </Button>
             <Link href="/admin/vehicles">
               <Button type="button" variant="ghost" size="lg" fullWidth>
-                Cancel
+                Anulează
               </Button>
             </Link>
           </div>

@@ -16,12 +16,12 @@ export default function Error({
         <AlertTriangle className="w-8 h-8 text-red-400" />
       </div>
       <div>
-        <h1 className="text-xl font-bold text-white">Something went wrong</h1>
+        <h1 className="text-xl font-bold text-white">A apărut o eroare</h1>
         <p className="text-slate-400 text-sm mt-2 max-w-xs">
           {process.env.NODE_ENV === "development" ? error.message : "A apărut o eroare neașteptată. Încearcă din nou."}
         </p>
       </div>
-      <Button variant="primary" onClick={reset}>Try again</Button>
+      <Button variant="primary" onClick={reset}>Încearcă din nou</Button>
     </div>
   );
 }

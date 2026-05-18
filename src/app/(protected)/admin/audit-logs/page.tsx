@@ -119,10 +119,10 @@ export default async function AuditLogsPage({ searchParams }: PageProps) {
         <div>
           <h1 className="text-xl font-bold text-white flex items-center gap-2">
             <ScrollText className="w-5 h-5 text-slate-400" />
-            Audit Log
+            Jurnal Audit
           </h1>
           <p className="text-slate-400 text-sm mt-0.5">
-            {logs.length} entries · complete activity trail
+            {logs.length} înregistrări · istoric complet activitate
           </p>
         </div>
         <AuditExportWrapper data={exportData} />
@@ -178,9 +178,9 @@ export default async function AuditLogsPage({ searchParams }: PageProps) {
             <ScrollText className="w-7 h-7 text-slate-500" />
           </div>
           <div>
-            <p className="font-medium text-white">No audit logs found</p>
+            <p className="font-medium text-white">Niciun jurnal de audit găsit</p>
             <p className="text-sm text-slate-400 mt-1">
-              Actions are logged automatically as users interact with the app
+              Acțiunile sunt înregistrate automat pe măsură ce utilizatorii interacționează cu aplicația
             </p>
           </div>
         </Card>
@@ -211,7 +211,7 @@ export default async function AuditLogsPage({ searchParams }: PageProps) {
                   <p className="text-sm text-white font-medium">
                     {log.action}
                     {log.entity && (
-                      <span className="text-slate-400 font-normal"> on </span>
+                      <span className="text-slate-400 font-normal"> pe </span>
                     )}
                     {log.entity && (
                       <span className="text-brand-300">{log.entity}</span>
@@ -236,7 +236,7 @@ export default async function AuditLogsPage({ searchParams }: PageProps) {
                     </span>
                     <span className="flex items-center gap-1 text-xs text-slate-500">
                       <Clock className="w-3 h-3" />
-                      {new Date(log.timestamp).toLocaleDateString("en-GB", {
+                      {new Date(log.timestamp).toLocaleDateString("ro-RO", {
                         day: "2-digit",
                         month: "short",
                         year: "numeric",

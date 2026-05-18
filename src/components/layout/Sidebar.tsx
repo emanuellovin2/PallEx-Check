@@ -25,18 +25,18 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: "/dashboard",          label: "Dashboard",   icon: LayoutDashboard, roles: ["admin", "driver"] },
+  { href: "/dashboard",          label: "Panou",        icon: LayoutDashboard, roles: ["admin", "driver"] },
   // Admin-specific routes
-  { href: "/admin/checklists",   label: "Checklists",  icon: ClipboardList,   roles: ["admin"], activePaths: ["/admin/checklists"] },
-  { href: "/admin/incidents",    label: "Incidents",   icon: AlertTriangle,   roles: ["admin"], activePaths: ["/admin/incidents"] },
-  { href: "/admin/drivers",      label: "Drivers",     icon: Users,           roles: ["admin"], activePaths: ["/admin/drivers"] },
-  { href: "/admin/vehicles",     label: "Vehicles",    icon: Truck,           roles: ["admin"], activePaths: ["/admin/vehicles"] },
-  { href: "/admin/audit-logs",   label: "Audit Logs",  icon: ScrollText,      roles: ["admin"], activePaths: ["/admin/audit-logs"], divider: true },
+  { href: "/admin/checklists",   label: "Checklist-uri", icon: ClipboardList,   roles: ["admin"], activePaths: ["/admin/checklists"] },
+  { href: "/admin/incidents",    label: "Incidente",    icon: AlertTriangle,   roles: ["admin"], activePaths: ["/admin/incidents"] },
+  { href: "/admin/drivers",      label: "Șoferi",       icon: Users,           roles: ["admin"], activePaths: ["/admin/drivers"] },
+  { href: "/admin/vehicles",     label: "Vehicule",     icon: Truck,           roles: ["admin"], activePaths: ["/admin/vehicles"] },
+  { href: "/admin/audit-logs",   label: "Jurnal Audit", icon: ScrollText,      roles: ["admin"], activePaths: ["/admin/audit-logs"], divider: true },
   // Driver-specific routes
-  { href: "/checklists",         label: "Checklists",  icon: ClipboardList,   roles: ["driver"] },
-  { href: "/incidents",          label: "Incidents",   icon: AlertTriangle,   roles: ["driver"] },
+  { href: "/checklists",         label: "Checklist-uri", icon: ClipboardList,   roles: ["driver"] },
+  { href: "/incidents",          label: "Incidente",    icon: AlertTriangle,   roles: ["driver"] },
   // Shared
-  { href: "/settings",           label: "Settings",    icon: Settings,        roles: ["admin", "driver"], divider: true },
+  { href: "/settings",           label: "Setări",       icon: Settings,        roles: ["admin", "driver"], divider: true },
 ];
 
 interface SidebarProps {
@@ -102,7 +102,7 @@ export function Sidebar({ role, userName, onSignOut }: SidebarProps) {
             text-slate-400 hover:bg-surface-800 hover:text-red-400 transition-colors duration-150"
         >
           <LogOut className="w-4 h-4" />
-          Sign Out
+          Deconectare
         </button>
       </div>
     </aside>

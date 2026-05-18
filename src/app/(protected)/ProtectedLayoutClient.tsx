@@ -21,7 +21,7 @@ export function ProtectedLayoutClient({ role, userName, children }: Props) {
   async function handleSignOut() {
     const supabase = createClient();
     await supabase.auth.signOut();
-    toast.success("Signed out successfully");
+    toast.success("Ai fost deconectat");
     router.push("/auth/login");
     router.refresh();
   }

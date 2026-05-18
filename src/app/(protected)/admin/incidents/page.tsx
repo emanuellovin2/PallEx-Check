@@ -19,6 +19,20 @@ interface PageProps {
 
 const SEVERITY_ORDER = { critical: 0, high: 1, medium: 2, low: 3 };
 
+const SEVERITY_LABELS: Record<string, string> = {
+  critical: "Critic",
+  high: "Ridicat",
+  medium: "Mediu",
+  low: "Scăzut",
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  open: "Deschis",
+  reviewing: "În analiză",
+  resolved: "Rezolvat",
+  closed: "Închis",
+};
+
 const severityVariant = (s: string) => {
   if (s === "critical" || s === "high") return "danger";
   if (s === "medium") return "warning";
@@ -119,9 +133,9 @@ export default async function AdminIncidentsPage({ searchParams }: PageProps) {
       {/* ── Header ── */}
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-xl font-bold text-white">Incidents</h1>
+          <h1 className="text-xl font-bold text-white">Incidente</h1>
           <p className="text-slate-400 text-sm mt-0.5">
-            {sorted.length} shown · {openCount} open · {criticalCount} critical
+            {sorted.length} afișate · {openCount} deschise · {criticalCount} critice
           </p>
         </div>
         <IncidentsExportWrapper data={exportData} />
@@ -136,21 +150,21 @@ export default async function AdminIncidentsPage({ searchParams }: PageProps) {
               text-red-400 text-xs font-medium hover:bg-red-500/25 transition-colors"
           >
             <AlertTriangle className="w-3 h-3" />
-            {incidents.filter((i) => i.severity === "critical").length} critical
+            {incidents.filter((i) => i.severity === "critical").length} critice
           </Link>
           <Link
             href="/admin/incidents?severity=high"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/15 border border-orange-500/25
               text-orange-400 text-xs font-medium hover:bg-orange-500/25 transition-colors"
           >
-            {incidents.filter((i) => i.severity === "high").length} high
+            {incidents.filter((i) => i.severity === "high").length} ridicate
           </Link>
           <Link
             href="/admin/incidents?status=open"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/25
               text-amber-400 text-xs font-medium hover:bg-amber-500/25 transition-colors"
           >
-            {openCount} open
+            {openCount} deschise
           </Link>
         </div>
       )}
@@ -163,10 +177,10 @@ export default async function AdminIncidentsPage({ searchParams }: PageProps) {
         showSeverity
         showSearch
         statusOptions={[
-          { value: "open", label: "Open" },
-          { value: "reviewing", label: "Reviewing" },
-          { value: "resolved", label: "Resolved" },
-          { value: "closed", label: "Closed" },
+          { value: "open", label: "Deschis" },
+          { value: "reviewing", label: "În analiză" },
+          { value: "resolved", label: "Rezolvat" },
+          { value: "closed", label: "Închis" },
         ]}
       />
 
@@ -177,8 +191,8 @@ export default async function AdminIncidentsPage({ searchParams }: PageProps) {
             <AlertTriangle className="w-7 h-7 text-slate-500" />
           </div>
           <div>
-            <p className="font-medium text-white">No incidents found</p>
-            <p className="text-sm text-slate-400 mt-1">Try adjusting filters</p>
+            <p className="font-medium text-white">Niciun incident găsit</p>
+            <p className="text-sm text-slate-400 mt-1">Încearcă să ajustezi filtrele</p>
           </div>
         </Card>
       ) : (
@@ -224,7 +238,7 @@ export default async function AdminIncidentsPage({ searchParams }: PageProps) {
                       )}
                     </div>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      {new Date(incident.created_at).toLocaleDateString("en-GB", {
+                      {new Date(incident.created_at).toLocaleDateString("ro-RO", {
                         day: "2-digit",
                         month: "short",
                         year: "numeric",
@@ -237,10 +251,10 @@ export default async function AdminIncidentsPage({ searchParams }: PageProps) {
                   {/* Badges */}
                   <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
                     <Badge variant={severityVariant(incident.severity) as "danger" | "warning" | "default"}>
-                      {incident.severity}
+                      {SEVERITY_LABELS[incident.severity] ?? incident.severity}
                     </Badge>
                     <Badge variant={statusVariant(incident.status) as "danger" | "warning" | "success" | "default"}>
-                      {incident.status}
+                      {STATUS_LABELS[incident.status] ?? incident.status}
                     </Badge>
                   </div>
                 </Card>

@@ -75,62 +75,62 @@ interface SafetyChecks {
 
 const SAFETY_GROUPS = [
   {
-    label: "Tyres",
+    label: "Anvelope",
     items: [
-      { key: "tyre_front_left", label: "Front Left" },
-      { key: "tyre_front_right", label: "Front Right" },
-      { key: "tyre_rear_left", label: "Rear Left" },
-      { key: "tyre_rear_right", label: "Rear Right" },
-      { key: "tyre_spare", label: "Spare" },
+      { key: "tyre_front_left", label: "Față Stânga" },
+      { key: "tyre_front_right", label: "Față Dreapta" },
+      { key: "tyre_rear_left", label: "Spate Stânga" },
+      { key: "tyre_rear_right", label: "Spate Dreapta" },
+      { key: "tyre_spare", label: "Roată de Rezervă" },
     ],
   },
   {
-    label: "Lights",
+    label: "Lumini",
     items: [
-      { key: "headlights", label: "Headlights" },
-      { key: "taillights", label: "Taillights" },
-      { key: "indicators", label: "Indicators" },
-      { key: "brake_lights", label: "Brake Lights" },
+      { key: "headlights", label: "Faruri față" },
+      { key: "taillights", label: "Stopuri spate" },
+      { key: "indicators", label: "Semnalizatoare" },
+      { key: "brake_lights", label: "Lumini de frână" },
     ],
   },
   {
-    label: "Brakes & Controls",
+    label: "Frâne & Comenzi",
     items: [
-      { key: "foot_brake", label: "Foot Brake" },
-      { key: "handbrake", label: "Handbrake" },
+      { key: "foot_brake", label: "Frână de picior" },
+      { key: "handbrake", label: "Frână de mână" },
     ],
   },
   {
-    label: "Fluids & Visibility",
+    label: "Fluide & Vizibilitate",
     items: [
-      { key: "engine_oil", label: "Engine Oil" },
-      { key: "coolant", label: "Coolant" },
-      { key: "fuel_level", label: "Fuel Level" },
-      { key: "windscreen", label: "Windscreen Clear" },
-      { key: "wipers", label: "Wipers OK" },
-      { key: "mirrors", label: "Mirrors Adjusted" },
+      { key: "engine_oil", label: "Ulei motor" },
+      { key: "coolant", label: "Lichid răcire" },
+      { key: "fuel_level", label: "Nivel combustibil" },
+      { key: "windscreen", label: "Parbriz curat" },
+      { key: "wipers", label: "Ștergătoare OK" },
+      { key: "mirrors", label: "Oglinzi reglate" },
     ],
   },
   {
-    label: "Body & Safety",
+    label: "Caroserie & Siguranță",
     items: [
-      { key: "doors_secure", label: "Doors Secure" },
-      { key: "seatbelts", label: "Seatbelts OK" },
-      { key: "cargo_secured", label: "Cargo Secured" },
-      { key: "fire_extinguisher", label: "Fire Extinguisher" },
-      { key: "first_aid_kit", label: "First Aid Kit" },
-      { key: "hi_vis_vest", label: "Hi-Vis Vest" },
+      { key: "doors_secure", label: "Uși asigurate" },
+      { key: "seatbelts", label: "Centuri OK" },
+      { key: "cargo_secured", label: "Marfă asigurată" },
+      { key: "fire_extinguisher", label: "Extinctor" },
+      { key: "first_aid_kit", label: "Trusă prim ajutor" },
+      { key: "hi_vis_vest", label: "Vestă reflectorizantă" },
     ],
   },
 ];
 
 const STEP_LABELS = [
-  { icon: Truck, label: "Vehicle" },
-  { icon: Camera, label: "Photos" },
-  { icon: ShieldCheck, label: "Safety" },
-  { icon: Package, label: "Cargo" },
-  { icon: AlertTriangle, label: "Damage" },
-  { icon: CheckCircle2, label: "Submit" },
+  { icon: Truck, label: "Vehicul" },
+  { icon: Camera, label: "Poze" },
+  { icon: ShieldCheck, label: "Siguranță" },
+  { icon: Package, label: "Marfă" },
+  { icon: AlertTriangle, label: "Daune" },
+  { icon: CheckCircle2, label: "Trimite" },
 ];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -193,9 +193,9 @@ function PhotoSlotCard({
   const preview = file ? URL.createObjectURL(file) : null;
 
   const labels: Record<PhotoSlot, string> = {
-    front: "Front View",
-    back: "Rear View",
-    side: "Side View",
+    front: "Vedere față",
+    back: "Vedere spate",
+    side: "Vedere laterală",
   };
 
   return (
@@ -226,7 +226,7 @@ function PhotoSlotCard({
             <div className="w-12 h-12 rounded-2xl bg-surface-700 flex items-center justify-center">
               <Camera className="w-6 h-6 text-slate-400" />
             </div>
-            <p className="text-sm text-slate-400">Tap to capture</p>
+            <p className="text-sm text-slate-400">Apasă pentru captură</p>
           </>
         )}
       </button>
@@ -341,7 +341,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
       (window as Window & { webkitSpeechRecognition?: typeof window.SpeechRecognition }).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      toast.error("Voice input not supported on this browser");
+      toast.error("Input vocal nesuportat în acest browser");
       return;
     }
     const rec = new SpeechRecognition();
@@ -357,7 +357,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
       if (!damageDesc) setDamageDesc(transcript);
     };
     rec.onend = () => setRecording(false);
-    rec.onerror = () => { setRecording(false); toast.error("Voice recognition error"); };
+    rec.onerror = () => { setRecording(false); toast.error("Eroare recunoaștere vocală"); };
 
     rec.start();
     recognitionRef.current = rec;
@@ -552,8 +552,8 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
 
   function next() {
     if (!canProceed()) {
-      if (step === 1) toast.error("Please capture all 3 mandatory photos");
-      if (step === 3) toast.error("Cargo type is required");
+      if (step === 1) toast.error("Captează toate cele 3 poze obligatorii");
+      if (step === 3) toast.error("Tipul mărfii este obligatoriu");
       return;
     }
     if (step < totalSteps - 1) setStep((s) => s + 1);
@@ -576,7 +576,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
       {/* Step label */}
       <div className="text-center">
         <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-          Step {step + 1} of {totalSteps}
+          Pasul {step + 1} din {totalSteps}
         </p>
         <h2 className="text-xl font-bold text-white mt-0.5">
           {STEP_LABELS[step].label}
@@ -591,7 +591,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5 mb-1">
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Assigned Vehicle</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Vehicul alocat</p>
               <Lock className="w-3 h-3 text-slate-600" />
             </div>
             <p className="text-2xl font-bold text-white tracking-wide">{vehicle.plate_number}</p>
@@ -604,7 +604,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
       {step === 1 && (
         <div className="flex flex-col gap-4">
           <p className="text-sm text-slate-400 text-center">
-            Capture <span className="text-white font-semibold">3 mandatory photos</span> of the vehicle before departure.
+            Captează <span className="text-white font-semibold">3 poze obligatorii</span> ale vehiculului înainte de plecare.
           </p>
           {(["front", "back", "side"] as PhotoSlot[]).map((slot) => (
             <PhotoSlotCard
@@ -635,7 +635,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
           {/* Progress bar */}
           <Card noPadding className="overflow-hidden">
             <div className="px-4 py-2.5 flex items-center justify-between">
-              <span className="text-sm text-slate-400">Safety checks</span>
+              <span className="text-sm text-slate-400">Verificări siguranță</span>
               <span className={`text-sm font-bold ${allSafety ? "text-emerald-400" : "text-brand-400"}`}>
                 {safetyCount}/{safetyTotal}
               </span>
@@ -662,7 +662,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             }}
             className="text-sm text-brand-400 font-semibold text-center w-full py-1 hover:text-brand-300 transition-colors"
           >
-            {allSafety ? "Deselect All" : "Mark All OK"}
+            {allSafety ? "Deselectează toate" : "Marchează toate OK"}
           </button>
 
           {SAFETY_GROUPS.map((group) => (
@@ -690,20 +690,20 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-              Cargo Type <span className="text-red-400">*</span>
+              Tip marfă <span className="text-red-400">*</span>
             </label>
             <input
               type="text"
               value={cargoType}
               onChange={(e) => setCargoType(e.target.value)}
-              placeholder="e.g. Palletised goods, Refrigerated, Hazmat…"
+              placeholder="ex. Paleți, Refrigerat, Mărfuri periculoase…"
               className="w-full h-12 rounded-xl border border-surface-700 bg-surface-800 text-white
                 placeholder-slate-500 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
             />
           </div>
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-              Quantity (pallets / units)
+              Cantitate (paleți / unități)
             </label>
             <input
               type="number"
@@ -717,12 +717,12 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
           </div>
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-              Notes (optional)
+              Note (opțional)
             </label>
             <textarea
               value={cargoNotes}
               onChange={(e) => setCargoNotes(e.target.value)}
-              placeholder="Special handling instructions, delivery ref…"
+              placeholder="Instrucțiuni speciale de manipulare, referință livrare…"
               rows={3}
               className="w-full rounded-xl border border-surface-700 bg-surface-800 text-white
                 placeholder-slate-500 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
@@ -754,10 +754,10 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             </div>
             <div className="flex-1 text-left">
               <p className={`font-bold text-base ${hasDamage ? "text-amber-300" : "text-white"}`}>
-                {hasDamage ? "Damage Reported" : "No Damage"}
+                {hasDamage ? "Daune raportate" : "Fără daune"}
               </p>
               <p className={`text-sm mt-0.5 ${hasDamage ? "text-amber-400/70" : "text-slate-400"}`}>
-                {hasDamage ? "Fill in damage details below" : "Tap to report damage"}
+                {hasDamage ? "Completează detaliile daunelor mai jos" : "Apasă pentru a raporta daune"}
               </p>
             </div>
             {hasDamage ? (
@@ -771,7 +771,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             <div className="flex flex-col gap-4">
               {/* Damage photo */}
               <div className="flex flex-col gap-2">
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Damage Photo</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Foto daune</p>
                 <button
                   type="button"
                   onClick={() => damagePhotoRef.current?.click()}
@@ -804,7 +804,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
                       <div className="w-12 h-12 rounded-2xl bg-surface-700 flex items-center justify-center">
                         <ImageIcon className="w-6 h-6 text-slate-400" />
                       </div>
-                      <p className="text-sm text-slate-400">Tap to capture damage photo</p>
+                      <p className="text-sm text-slate-400">Apasă pentru a fotografia daunele</p>
                     </>
                   )}
                 </button>
@@ -825,7 +825,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
               <div className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                    Description
+                    Descriere
                   </label>
                   <button
                     type="button"
@@ -838,20 +838,20 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
                     ].join(" ")}
                   >
                     {recording ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
-                    {recording ? "Stop" : "Voice"}
+                    {recording ? "Stop" : "Voce"}
                   </button>
                 </div>
                 <textarea
                   value={damageDesc}
                   onChange={(e) => setDamageDesc(e.target.value)}
-                  placeholder="Describe the damage… (or use voice input)"
+                  placeholder="Descrie daunele… (sau folosește input vocal)"
                   rows={4}
                   className="w-full rounded-xl border border-surface-700 bg-surface-800 text-white
                     placeholder-slate-500 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
                 />
                 {voiceText && voiceText !== damageDesc && (
                   <p className="text-xs text-slate-500">
-                    Voice: <span className="text-slate-400 italic">"{voiceText}"</span>
+                    Vocal: <span className="text-slate-400 italic">"{voiceText}"</span>
                   </p>
                 )}
               </div>
@@ -868,7 +868,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             <div className="px-4 py-3 flex items-center gap-3 border-b border-surface-700">
               <Truck className="w-4 h-4 text-brand-400 flex-shrink-0" />
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-slate-500">Vehicle</p>
+                <p className="text-xs text-slate-500">Vehicul</p>
                 <p className="text-sm font-semibold text-white">{vehicle.plate_number} — {vehicle.model}</p>
               </div>
             </div>
@@ -876,9 +876,9 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             <div className="px-4 py-3 flex items-center gap-3 border-b border-surface-700">
               <Camera className="w-4 h-4 text-brand-400 flex-shrink-0" />
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-slate-500">Mandatory Photos</p>
+                <p className="text-xs text-slate-500">Poze obligatorii</p>
                 <p className="text-sm font-semibold text-white">
-                  {[photos.front, photos.back, photos.side].filter(Boolean).length}/3 captured
+                  {[photos.front, photos.back, photos.side].filter(Boolean).length}/3 captate
                 </p>
               </div>
               <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
@@ -887,9 +887,9 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             <div className="px-4 py-3 flex items-center gap-3 border-b border-surface-700">
               <ShieldCheck className="w-4 h-4 text-brand-400 flex-shrink-0" />
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-slate-500">Safety Checks</p>
+                <p className="text-xs text-slate-500">Verificări siguranță</p>
                 <p className={`text-sm font-semibold ${allSafety ? "text-emerald-300" : "text-amber-300"}`}>
-                  {safetyCount}/{safetyTotal} passed
+                  {safetyCount}/{safetyTotal} trecute
                 </p>
               </div>
               {allSafety ? (
@@ -902,9 +902,9 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             <div className="px-4 py-3 flex items-center gap-3 border-b border-surface-700">
               <Package className="w-4 h-4 text-brand-400 flex-shrink-0" />
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-slate-500">Cargo</p>
+                <p className="text-xs text-slate-500">Marfă</p>
                 <p className="text-sm font-semibold text-white">
-                  {cargoType || "—"}{cargoQty ? ` · ${cargoQty} units` : ""}
+                  {cargoType || "—"}{cargoQty ? ` · ${cargoQty} unități` : ""}
                 </p>
               </div>
             </div>
@@ -912,9 +912,9 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             <div className="px-4 py-3 flex items-center gap-3">
               <AlertTriangle className={`w-4 h-4 flex-shrink-0 ${hasDamage ? "text-amber-400" : "text-slate-500"}`} />
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-slate-500">Damage Report</p>
+                <p className="text-xs text-slate-500">Raport daune</p>
                 <p className={`text-sm font-semibold ${hasDamage ? "text-amber-300" : "text-emerald-300"}`}>
-                  {hasDamage ? "Damage noted" : "No damage"}
+                  {hasDamage ? "Daune raportate" : "Fără daune"}
                 </p>
               </div>
             </div>
@@ -923,7 +923,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
           <Card className="flex items-start gap-3 bg-amber-500/5 border-amber-500/20">
             <Lock className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
             <p className="text-sm text-amber-300/80">
-              Once submitted this checklist will be <span className="font-semibold text-amber-300">permanently locked</span> and cannot be edited. GPS coordinates will be captured automatically.
+              Odată trimis, acest checklist va fi <span className="font-semibold text-amber-300">blocat permanent</span> și nu mai poate fi editat. Coordonatele GPS vor fi capturate automat.
             </p>
           </Card>
 
@@ -949,7 +949,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             className="flex-1"
           >
             <ChevronLeft className="w-5 h-5" />
-            Back
+            Înapoi
           </Button>
         )}
         {step < totalSteps - 1 ? (
@@ -959,7 +959,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             onClick={next}
             className={step === 0 ? "w-full" : "flex-1"}
           >
-            Next
+            Înainte
             <ChevronRight className="w-5 h-5" />
           </Button>
         ) : (
@@ -974,7 +974,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
             {isOnline ? (
               <>
                 <Lock className="w-5 h-5" />
-                Submit & Lock
+                Trimite & Blochează
               </>
             ) : (
               <>

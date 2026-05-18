@@ -36,10 +36,10 @@ type PhotoPreview = {
 };
 
 const SEVERITIES: { value: IncidentSeverity; label: string; bg: string; border: string; text: string }[] = [
-  { value: "low",      label: "Low",      bg: "bg-slate-800",  border: "border-slate-500",  text: "text-slate-300"  },
-  { value: "medium",   label: "Medium",   bg: "bg-amber-900/40",  border: "border-amber-500",  text: "text-amber-300"  },
-  { value: "high",     label: "High",     bg: "bg-orange-900/40", border: "border-orange-500", text: "text-orange-300" },
-  { value: "critical", label: "Critical", bg: "bg-red-900/40",    border: "border-red-500",    text: "text-red-300"    },
+  { value: "low",      label: "Scăzut",  bg: "bg-slate-800",  border: "border-slate-500",  text: "text-slate-300"  },
+  { value: "medium",   label: "Mediu",   bg: "bg-amber-900/40",  border: "border-amber-500",  text: "text-amber-300"  },
+  { value: "high",     label: "Ridicat", bg: "bg-orange-900/40", border: "border-orange-500", text: "text-orange-300" },
+  { value: "critical", label: "Critic",  bg: "bg-red-900/40",    border: "border-red-500",    text: "text-red-300"    },
 ];
 
 // ── Component ────────────────────────────────────────────────
@@ -69,7 +69,7 @@ export default function NewIncidentPage() {
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      setGps({ status: "error", message: "GPS not available on this device" });
+      setGps({ status: "error", message: "GPS-ul nu este disponibil pe acest dispozitiv" });
       return;
     }
     setGps({ status: "acquiring" });
@@ -87,8 +87,8 @@ export default function NewIncidentPage() {
           status: "error",
           message:
             err.code === err.PERMISSION_DENIED
-              ? "Location permission denied"
-              : "Could not acquire GPS signal",
+              ? "Permisiunea de locație a fost refuzată"
+              : "Nu s-a putut obține semnalul GPS",
         });
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
@@ -102,7 +102,7 @@ export default function NewIncidentPage() {
       (window as any).SpeechRecognition ||
       (window as any).webkitSpeechRecognition;
     if (!SR) {
-      toast.error("Voice input is not supported on this browser");
+      toast.error("Introducerea vocală nu este suportată pe acest browser");
       return;
     }
     if (isListening) {
@@ -131,7 +131,7 @@ export default function NewIncidentPage() {
 
     recognition.onerror = () => {
       setIsListening(false);
-      toast.error("Voice recording failed — please try again");
+      toast.error("Înregistrarea vocală a eșuat — încearcă din nou");
     };
 
     recognition.onend = () => {
@@ -178,9 +178,9 @@ export default function NewIncidentPage() {
 
   function validate(): boolean {
     const errs: Record<string, string> = {};
-    if (!title.trim()) errs.title = "Title is required";
+    if (!title.trim()) errs.title = "Titlul este obligatoriu";
     if (hasDamage && photos.length === 0)
-      errs.photos = "At least one photo is required when damage is reported";
+      errs.photos = "Cel puțin o fotografie este obligatorie când se raportează daune";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   }
@@ -225,7 +225,7 @@ export default function NewIncidentPage() {
 
         if (uploadErr) {
           console.error("Photo upload failed:", uploadErr.message);
-          toast.error(`Photo upload failed: ${file.name}`);
+          toast.error(`Încărcarea fotografiei a eșuat: ${file.name}`);
           continue;
         }
         uploadedPaths.push(path);
@@ -249,7 +249,7 @@ export default function NewIncidentPage() {
         });
 
       if (incidentErr) {
-        toast.error("Failed to create incident — please try again");
+        toast.error("Crearea incidentului a eșuat — încearcă din nou");
         return;
       }
 
@@ -272,12 +272,12 @@ export default function NewIncidentPage() {
       });
 
       if (finalizeErr) {
-        toast.error("Failed to lock incident — please contact support");
+        toast.error("Blocarea incidentului a eșuat — contactează suportul");
         console.error("finalize_incident failed:", finalizeErr.message);
         return;
       }
 
-      toast.success("Incident reported and locked");
+      toast.success("Incident raportat și blocat");
       router.push("/incidents");
     } finally {
       setSaving(false);
@@ -296,9 +296,9 @@ export default function NewIncidentPage() {
           </button>
         </Link>
         <div>
-          <h1 className="text-xl font-bold text-white">Report Incident</h1>
+          <h1 className="text-xl font-bold text-white">Raportează Incident</h1>
           <p className="text-xs text-slate-400 mt-0.5">
-            Immutable once submitted
+            Imuabil după trimitere
           </p>
         </div>
       </div>
@@ -322,18 +322,18 @@ export default function NewIncidentPage() {
           <MapPin className="w-4 h-4 flex-shrink-0" />
         )}
         <div className="flex-1 min-w-0">
-          {gps.status === "idle" && <span>Waiting for GPS…</span>}
-          {gps.status === "acquiring" && <span>Acquiring GPS location…</span>}
+          {gps.status === "idle" && <span>Se așteaptă GPS-ul…</span>}
+          {gps.status === "acquiring" && <span>Se obține locația GPS…</span>}
           {gps.status === "acquired" && (
             <span>
-              GPS captured — {gps.lat.toFixed(5)}, {gps.lng.toFixed(5)}{" "}
+              GPS capturat — {gps.lat.toFixed(5)}, {gps.lng.toFixed(5)}{" "}
               <span className="text-emerald-500 text-xs">
                 (±{gps.accuracy}m)
               </span>
             </span>
           )}
           {gps.status === "error" && (
-            <span>{gps.message} — location will not be recorded</span>
+            <span>{gps.message} — locația nu va fi înregistrată</span>
           )}
         </div>
       </div>
@@ -341,8 +341,8 @@ export default function NewIncidentPage() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         {/* Title */}
         <Input
-          label="Incident Title"
-          placeholder="e.g. Rear-end collision on M1"
+          label="Titlu incident"
+          placeholder="ex. Coliziune din spate pe A1"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           error={errors.title}
@@ -351,7 +351,7 @@ export default function NewIncidentPage() {
         {/* Severity */}
         <div className="flex flex-col gap-2">
           <label className="text-sm font-medium text-slate-300">
-            Severity Level
+            Nivel severitate
           </label>
           <div className="grid grid-cols-4 gap-2">
             {SEVERITIES.map(({ value, label, bg, border, text }) => (
@@ -375,12 +375,12 @@ export default function NewIncidentPage() {
         {/* Damage Toggle */}
         <div className="flex flex-col gap-2">
           <label className="text-sm font-medium text-slate-300">
-            Vehicle / Property Damage?
+            Daune vehicul / proprietate?
           </label>
           <div className="grid grid-cols-2 gap-2">
             {[
-              { value: false, label: "No Damage" },
-              { value: true, label: "Damage Present" },
+              { value: false, label: "Fără daune" },
+              { value: true, label: "Daune prezente" },
             ].map(({ value, label }) => (
               <button
                 key={String(value)}
@@ -402,7 +402,7 @@ export default function NewIncidentPage() {
           {hasDamage && (
             <p className="text-xs text-amber-400 flex items-center gap-1.5">
               <Info className="w-3.5 h-3.5 flex-shrink-0" />
-              Photos are required when damage is reported
+              Fotografiile sunt obligatorii când se raportează daune
             </p>
           )}
         </div>
@@ -411,7 +411,7 @@ export default function NewIncidentPage() {
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <label className="text-sm font-medium text-slate-300">
-              Description
+              Descriere
             </label>
             <button
               type="button"
@@ -426,12 +426,12 @@ export default function NewIncidentPage() {
               {isListening ? (
                 <>
                   <MicOff className="w-3.5 h-3.5" />
-                  Listening…
+                  Ascult…
                 </>
               ) : (
                 <>
                   <Mic className="w-3.5 h-3.5" />
-                  Voice Input
+                  Input vocal
                 </>
               )}
             </button>
@@ -439,8 +439,8 @@ export default function NewIncidentPage() {
           <textarea
             placeholder={
               isListening
-                ? "Listening — speak now…"
-                : "Describe what happened. Tap 'Voice Input' to dictate."
+                ? "Ascult — vorbește acum…"
+                : "Descrie ce s-a întâmplat. Apasă 'Input vocal' pentru dictare."
             }
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -452,7 +452,7 @@ export default function NewIncidentPage() {
           {voiceText && (
             <p className="text-xs text-slate-500 flex items-center gap-1">
               <Mic className="w-3 h-3" />
-              Last voice capture appended
+              Ultima captură vocală adăugată
             </p>
           )}
         </div>
@@ -461,12 +461,12 @@ export default function NewIncidentPage() {
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <label className="text-sm font-medium text-slate-300">
-              Photos{" "}
+              Fotografii{" "}
               {hasDamage && (
-                <span className="text-red-400 text-xs ml-1">* required</span>
+                <span className="text-red-400 text-xs ml-1">* obligatoriu</span>
               )}
             </label>
-            <span className="text-xs text-slate-500">{photos.length} added</span>
+            <span className="text-xs text-slate-500">{photos.length} adăugate</span>
           </div>
 
           {/* Grid of thumbnails */}
@@ -477,7 +477,7 @@ export default function NewIncidentPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={p.objectUrl}
-                    alt={`Incident photo ${idx + 1}`}
+                    alt={`Fotografie incident ${idx + 1}`}
                     className="w-full h-full object-cover"
                   />
                   <button
@@ -506,7 +506,7 @@ export default function NewIncidentPage() {
             ].join(" ")}
           >
             <Camera className="w-4 h-4" />
-            {photos.length === 0 ? "Add Photo / Open Camera" : "Add Another Photo"}
+            {photos.length === 0 ? "Adaugă Foto / Deschide Camera" : "Adaugă Altă Fotografie"}
           </button>
           {errors.photos && (
             <p className="text-xs text-red-400">{errors.photos}</p>
@@ -527,8 +527,8 @@ export default function NewIncidentPage() {
         <div className="flex flex-col gap-2 pt-2">
           <div className="flex items-center gap-2 px-1 text-xs text-slate-500">
             <Lock className="w-3.5 h-3.5 flex-shrink-0" />
-            Once submitted this report is permanently locked and cannot be
-            edited or deleted.
+            Odată trimis, acest raport este blocat permanent și nu poate fi
+            editat sau șters.
           </div>
           <Button
             type="submit"
@@ -537,7 +537,7 @@ export default function NewIncidentPage() {
             fullWidth
             loading={saving}
           >
-            {saving ? "Submitting…" : "🚨 Submit & Lock Report"}
+            {saving ? "Se trimite…" : "🚨 Trimite și Blochează Raportul"}
           </Button>
         </div>
       </form>

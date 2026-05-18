@@ -177,7 +177,7 @@ export function ExportButton({
                 hover:bg-surface-700 hover:text-white transition-colors"
             >
               <FileText className="w-4 h-4 text-emerald-400" />
-              Download CSV
+              Descarcă CSV
             </button>
             <button
               onClick={downloadJSON}
@@ -185,7 +185,7 @@ export function ExportButton({
                 hover:bg-surface-700 hover:text-white transition-colors"
             >
               <FileText className="w-4 h-4 text-brand-400" />
-              Download JSON
+              Descarcă JSON
             </button>
             <button
               onClick={printPDF}
@@ -193,7 +193,7 @@ export function ExportButton({
                 hover:bg-surface-700 hover:text-white transition-colors"
             >
               <FileText className="w-4 h-4 text-red-400" />
-              Print / PDF
+              Printează / PDF
             </button>
           </div>
         </>

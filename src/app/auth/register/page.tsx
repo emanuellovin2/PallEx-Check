@@ -25,11 +25,11 @@ export default function RegisterPage() {
         </div>
 
         <h2 className="text-xl font-bold text-white mb-2">
-          Accounts are by invitation only
+          Conturile sunt doar pe bază de invitație
         </h2>
         <p className="text-slate-400 text-sm leading-relaxed">
-          Driver accounts are created by an administrator. Please contact your
-          fleet manager to get access.
+          Conturile de șofer sunt create de un administrator. Contactează managerul
+          de flotă pentru a obține acces.
         </p>
 
         <Link
@@ -38,7 +38,7 @@ export default function RegisterPage() {
             text-brand-400 hover:text-brand-300 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Sign In
+          Înapoi la autentificare
         </Link>
       </div>
     </div>

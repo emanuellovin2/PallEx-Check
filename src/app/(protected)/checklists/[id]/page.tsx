@@ -73,29 +73,29 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
   const isSubmitted = checklist.status === "submitted";
 
   const SAFETY_FIELDS: [string, string][] = [
-    ["tyre_front_left", "Tyre FL"],
-    ["tyre_front_right", "Tyre FR"],
-    ["tyre_rear_left", "Tyre RL"],
-    ["tyre_rear_right", "Tyre RR"],
-    ["tyre_spare", "Spare Tyre"],
-    ["headlights", "Headlights"],
-    ["taillights", "Taillights"],
-    ["indicators", "Indicators"],
-    ["brake_lights", "Brake Lights"],
-    ["foot_brake", "Foot Brake"],
-    ["handbrake", "Handbrake"],
-    ["engine_oil", "Engine Oil"],
-    ["coolant", "Coolant"],
-    ["fuel_level", "Fuel Level"],
-    ["windscreen", "Windscreen"],
-    ["wipers", "Wipers"],
-    ["mirrors", "Mirrors"],
-    ["doors_secure", "Doors Secure"],
-    ["seatbelts", "Seatbelts"],
-    ["cargo_secured", "Cargo Secured"],
-    ["fire_extinguisher", "Fire Extinguisher"],
-    ["first_aid_kit", "First Aid Kit"],
-    ["hi_vis_vest", "Hi-Vis Vest"],
+    ["tyre_front_left", "Anvelopă față stânga"],
+    ["tyre_front_right", "Anvelopă față dreapta"],
+    ["tyre_rear_left", "Anvelopă spate stânga"],
+    ["tyre_rear_right", "Anvelopă spate dreapta"],
+    ["tyre_spare", "Roată de rezervă"],
+    ["headlights", "Faruri față"],
+    ["taillights", "Stopuri spate"],
+    ["indicators", "Semnalizatoare"],
+    ["brake_lights", "Lumini de frână"],
+    ["foot_brake", "Frână de picior"],
+    ["handbrake", "Frână de mână"],
+    ["engine_oil", "Ulei motor"],
+    ["coolant", "Lichid răcire"],
+    ["fuel_level", "Nivel combustibil"],
+    ["windscreen", "Parbriz"],
+    ["wipers", "Ștergătoare"],
+    ["mirrors", "Oglinzi"],
+    ["doors_secure", "Uși asigurate"],
+    ["seatbelts", "Centuri"],
+    ["cargo_secured", "Marfă asigurată"],
+    ["fire_extinguisher", "Extinctor"],
+    ["first_aid_kit", "Trusă prim ajutor"],
+    ["hi_vis_vest", "Vestă reflectorizantă"],
   ];
 
   const photosByType = (type: string) =>
@@ -120,7 +120,7 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
         {isLocked && (
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-700 border border-surface-600">
             <Lock className="w-3.5 h-3.5 text-slate-400" />
-            <span className="text-xs text-slate-400 font-medium">Locked</span>
+            <span className="text-xs text-slate-400 font-medium">Blocat</span>
           </div>
         )}
       </div>
@@ -130,16 +130,16 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
         <div className="px-4 py-3 flex items-center justify-between border-b border-surface-700">
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Status</span>
           <Badge variant={isSubmitted ? "success" : "warning"}>
-            {isSubmitted ? "Submitted" : "Draft"}
+            {isSubmitted ? "Trimis" : "Ciornă"}
           </Badge>
         </div>
         {checklist.submitted_at && (
           <div className="px-4 py-3 flex items-center gap-2 border-b border-surface-700">
             <Clock className="w-4 h-4 text-slate-500 flex-shrink-0" />
             <div>
-              <p className="text-xs text-slate-500">Submitted</p>
+              <p className="text-xs text-slate-500">Trimis</p>
               <p className="text-sm text-white font-medium">
-                {new Date(checklist.submitted_at).toLocaleString("en-GB", {
+                {new Date(checklist.submitted_at).toLocaleString("ro-RO", {
                   day: "2-digit",
                   month: "short",
                   year: "numeric",
@@ -154,7 +154,7 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
           <div className="px-4 py-3 flex items-center gap-2">
             <MapPin className="w-4 h-4 text-slate-500 flex-shrink-0" />
             <div>
-              <p className="text-xs text-slate-500">GPS Location</p>
+              <p className="text-xs text-slate-500">Locație GPS</p>
               <p className="text-sm text-white font-medium font-mono">
                 {Number(checklist.gps_lat).toFixed(6)}, {Number(checklist.gps_lng).toFixed(6)}
               </p>
@@ -164,7 +164,7 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
       </Card>
 
       {/* Vehicle & Driver */}
-      <SectionHeader icon={<Truck className="w-4 h-4" />} label="Vehicle" />
+      <SectionHeader icon={<Truck className="w-4 h-4" />} label="Vehicul" />
       <Card noPadding className="overflow-hidden">
         <div className="px-4 py-3 flex items-center gap-3 border-b border-surface-700">
           <div className="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
@@ -177,14 +177,14 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
         </div>
         {profile?.role === "admin" && (
           <div className="px-4 py-3">
-            <p className="text-xs text-slate-500">Driver</p>
+            <p className="text-xs text-slate-500">Șofer</p>
             <p className="text-sm text-white font-medium">{driver?.full_name || driver?.email || "—"}</p>
           </div>
         )}
       </Card>
 
       {/* Mandatory Photos */}
-      <SectionHeader icon={<Camera className="w-4 h-4" />} label="Mandatory Photos" />
+      <SectionHeader icon={<Camera className="w-4 h-4" />} label="Poze obligatorii" />
       <div className="grid grid-cols-3 gap-2">
         {(["front", "back", "side"] as const).map((slot) => {
           const slotPhotos = photosByType(slot);
@@ -215,8 +215,8 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
       {/* Safety Checks */}
       <SectionHeader
         icon={<ShieldCheck className="w-4 h-4" />}
-        label="Safety Checks"
-        badge={`${passCount}/${SAFETY_FIELDS.length} passed`}
+        label="Verificări siguranță"
+        badge={`${passCount}/${SAFETY_FIELDS.length} trecute`}
         badgeVariant={passCount === SAFETY_FIELDS.length ? "success" : "warning"}
       />
       {checks ? (
@@ -244,29 +244,29 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
           })}
           {checks.notes && (
             <div className="px-4 py-3 border-t border-surface-700">
-              <p className="text-xs text-slate-500 mb-1">Notes</p>
+              <p className="text-xs text-slate-500 mb-1">Note</p>
               <p className="text-sm text-white">{checks.notes}</p>
             </div>
           )}
         </Card>
       ) : (
         <Card>
-          <p className="text-sm text-slate-500 text-center">No safety data recorded</p>
+          <p className="text-sm text-slate-500 text-center">Nicio verificare de siguranță înregistrată</p>
         </Card>
       )}
 
       {/* Cargo */}
-      <SectionHeader icon={<Package className="w-4 h-4" />} label="Cargo Details" />
+      <SectionHeader icon={<Package className="w-4 h-4" />} label="Detalii marfă" />
       <Card noPadding className="overflow-hidden">
-        <InfoRow label="Type" value={checks?.cargo_type ?? null} />
+        <InfoRow label="Tip" value={checks?.cargo_type ?? null} />
         <InfoRow
-          label="Quantity"
+          label="Cantitate"
           value={checks?.cargo_quantity != null ? String(checks.cargo_quantity) : null}
           bordered
         />
         {checks?.cargo_notes && (
           <div className="px-4 py-3 border-t border-surface-700">
-            <p className="text-xs text-slate-500 mb-1">Notes</p>
+            <p className="text-xs text-slate-500 mb-1">Note</p>
             <p className="text-sm text-white">{checks.cargo_notes}</p>
           </div>
         )}
@@ -275,8 +275,8 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
       {/* Damage */}
       <SectionHeader
         icon={<AlertTriangle className="w-4 h-4" />}
-        label="Damage Report"
-        badge={checks?.has_damage ? "Damage Noted" : "No Damage"}
+        label="Raport daune"
+        badge={checks?.has_damage ? "Daune notate" : "Fără daune"}
         badgeVariant={checks?.has_damage ? "warning" : "success"}
       />
       {checks?.has_damage ? (
@@ -298,7 +298,7 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
               )}
               {checks?.damage_voice_text && checks.damage_voice_text !== checks.damage_description && (
                 <p className="text-xs text-slate-500 mt-2 italic">
-                  Voice transcript: "{checks.damage_voice_text}"
+                  Transcriere vocală: "{checks.damage_voice_text}"
                 </p>
               )}
             </Card>
@@ -308,7 +308,7 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
         <Card className="bg-emerald-500/5 border-emerald-500/20">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <p className="text-sm text-emerald-300">No damage reported</p>
+            <p className="text-sm text-emerald-300">Nicio daună raportată</p>
           </div>
         </Card>
       )}
