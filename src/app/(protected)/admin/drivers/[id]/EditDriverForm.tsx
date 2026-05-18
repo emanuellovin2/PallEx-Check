@@ -56,7 +56,7 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
   // ── Update name ──────────────────────────────────────────────────────────────
   async function handleSaveName(e: React.FormEvent) {
     e.preventDefault();
-    if (!fullName.trim()) { toast.error("Name cannot be empty"); return; }
+    if (!fullName.trim()) { toast.error("Numele nu poate fi gol"); return; }
     setSavingProfile(true);
     try {
       const res = await fetch("/api/admin/users", {
@@ -65,8 +65,8 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
         body: JSON.stringify({ userId: driver.id, fullName: fullName.trim() }),
       });
       const data = await res.json();
-      if (!res.ok) { toast.error(data.error ?? "Failed to update"); return; }
-      toast.success("Name updated");
+      if (!res.ok) { toast.error(data.error ?? "Actualizarea a eșuat"); return; }
+      toast.success("Nume actualizat");
       router.refresh();
     } finally {
       setSavingProfile(false);
@@ -76,7 +76,7 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
   // ── Set new password ─────────────────────────────────────────────────────────
   async function handleSetPassword(e: React.FormEvent) {
     e.preventDefault();
-    if (newPassword.length < 8) { toast.error("Password must be at least 8 characters"); return; }
+    if (newPassword.length < 8) { toast.error("Parola trebuie să aibă cel puțin 8 caractere"); return; }
     setSavingPassword(true);
     try {
       const res = await fetch("/api/admin/users", {
@@ -85,8 +85,8 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
         body: JSON.stringify({ userId: driver.id, password: newPassword }),
       });
       const data = await res.json();
-      if (!res.ok) { toast.error(data.error ?? "Failed to set password"); return; }
-      toast.success("Password updated successfully");
+      if (!res.ok) { toast.error(data.error ?? "Setarea parolei a eșuat"); return; }
+      toast.success("Parolă actualizată cu succes");
       setNewPassword("");
     } finally {
       setSavingPassword(false);
@@ -122,8 +122,8 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
           .update({ assigned_driver_id: driver.id })
           .eq("id", selectedVehicleId);
 
-        if (error) { toast.error("Failed to assign vehicle"); return; }
-        toast.success("Vehicle assigned");
+        if (error) { toast.error("Alocarea vehiculului a eșuat"); return; }
+        toast.success("Vehicul alocat");
       } else {
         // Unassign current vehicle
         const { error } = await supabase
@@ -131,8 +131,8 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
           .update({ assigned_driver_id: null })
           .eq("assigned_driver_id", driver.id);
 
-        if (error) { toast.error("Failed to unassign vehicle"); return; }
-        toast.success("Vehicle unassigned");
+        if (error) { toast.error("Dealocarea vehiculului a eșuat"); return; }
+        toast.success("Vehicul dealocat");
       }
       router.refresh();
     } finally {
@@ -151,8 +151,8 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
         body: JSON.stringify({ userId: driver.id }),
       });
       const data = await res.json();
-      if (!res.ok) { toast.error(data.error ?? "Failed to delete"); return; }
-      toast.success("Driver deleted");
+      if (!res.ok) { toast.error(data.error ?? "Ștergerea a eșuat"); return; }
+      toast.success("Șofer șters");
       router.push("/admin/drivers");
     } finally {
       setDeleting(false);
@@ -168,7 +168,7 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
         className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm w-fit"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Drivers
+        Înapoi la Șoferi
       </Link>
 
       <div>
@@ -184,12 +184,12 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
           <div className="w-9 h-9 rounded-xl bg-brand-500/15 flex items-center justify-center">
             <User className="w-4 h-4 text-brand-400" />
           </div>
-          <p className="font-semibold text-white text-sm">Profile</p>
+          <p className="font-semibold text-white text-sm">Profil</p>
         </div>
 
         <form onSubmit={handleSaveName} className="flex flex-col gap-3">
           <Input
-            label="Full Name"
+            label="Nume complet"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             leftIcon={<User className="w-4 h-4" />}
@@ -197,7 +197,7 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
           <Input label="Email" value={driver.email} disabled className="opacity-60 cursor-not-allowed" />
           <Button type="submit" variant="primary" size="sm" loading={savingProfile} className="gap-2 self-start">
             <Save className="w-3.5 h-3.5" />
-            Save Name
+            Salvează numele
           </Button>
         </form>
       </Card>
@@ -209,17 +209,17 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
             <Lock className="w-4 h-4 text-amber-400" />
           </div>
           <div>
-            <p className="font-semibold text-white text-sm">Set New Password</p>
-            <p className="text-xs text-slate-400">Driver will use this to log in</p>
+            <p className="font-semibold text-white text-sm">Setează parolă nouă</p>
+            <p className="text-xs text-slate-400">Șoferul va folosi aceasta pentru autentificare</p>
           </div>
         </div>
 
         <form onSubmit={handleSetPassword} className="flex flex-col gap-3">
           <div className="flex flex-col gap-1.5">
             <Input
-              label="New Password"
+              label="Parolă nouă"
               type={showPassword ? "text" : "password"}
-              placeholder="Min. 8 characters"
+              placeholder="Min. 8 caractere"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               leftIcon={<Lock className="w-4 h-4" />}
@@ -231,12 +231,12 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
               className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-300 w-fit"
             >
               {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-              {showPassword ? "Hide" : "Show"} password
+              {showPassword ? "Ascunde" : "Afișează"} parola
             </button>
           </div>
           <Button type="submit" variant="primary" size="sm" loading={savingPassword} className="gap-2 self-start">
             <Lock className="w-3.5 h-3.5" />
-            Update Password
+            Actualizează parola
           </Button>
         </form>
       </Card>
@@ -248,14 +248,14 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
             <Truck className="w-4 h-4 text-emerald-400" />
           </div>
           <div>
-            <p className="font-semibold text-white text-sm">Assigned Vehicle</p>
-            <p className="text-xs text-slate-400">Driver only sees this vehicle</p>
+            <p className="font-semibold text-white text-sm">Vehicul alocat</p>
+            <p className="text-xs text-slate-400">Șoferul vede doar acest vehicul</p>
           </div>
         </div>
 
         <form onSubmit={handleSaveVehicle} className="flex flex-col gap-3">
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-slate-300">Vehicle</label>
+            <label className="text-sm font-medium text-slate-300">Vehicul</label>
             <select
               value={selectedVehicleId ?? ""}
               onChange={(e) => setSelectedVehicleId(e.target.value || null)}
@@ -263,12 +263,12 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
                 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500
                 transition-colors appearance-none cursor-pointer"
             >
-              <option value="">— No vehicle assigned —</option>
+              <option value="">— Niciun vehicul alocat —</option>
               {vehicles.map((v) => (
                 <option key={v.id} value={v.id}>
                   {v.plate_number} · {v.model}
                   {v.assigned_driver_id && v.assigned_driver_id !== driver.id
-                    ? " (assigned to another driver)"
+                    ? " (alocat altui șofer)"
                     : ""}
                 </option>
               ))}
@@ -276,16 +276,16 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
           </div>
           <Button type="submit" variant="primary" size="sm" loading={savingVehicle} className="gap-2 self-start">
             <Truck className="w-3.5 h-3.5" />
-            Save Assignment
+            Salvează alocarea
           </Button>
         </form>
       </Card>
 
       {/* ── Danger Zone ── */}
       <Card className="flex flex-col gap-3 border-red-900/40">
-        <p className="font-semibold text-red-400 text-sm">Danger Zone</p>
+        <p className="font-semibold text-red-400 text-sm">Zonă periculoasă</p>
         <p className="text-xs text-slate-400">
-          Deleting a driver removes their account and all associated data permanently.
+          Ștergerea unui șofer îi elimină contul și toate datele asociate permanent.
         </p>
         <Button
           type="button"
@@ -296,14 +296,14 @@ export function EditDriverForm({ driver, vehicles, assignedVehicleId }: Props) {
           className="gap-2 self-start"
         >
           <Trash2 className="w-3.5 h-3.5" />
-          {confirmDelete ? "Confirm Delete" : "Delete Driver"}
+          {confirmDelete ? "Confirmă ștergerea" : "Șterge Șoferul"}
         </Button>
         {confirmDelete && !deleting && (
           <button
             onClick={() => setConfirmDelete(false)}
             className="text-xs text-slate-400 hover:text-slate-300 self-start"
           >
-            Cancel
+            Anulează
           </button>
         )}
       </Card>

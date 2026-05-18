@@ -38,7 +38,7 @@ export default async function NewChecklistPage() {
             <ChevronLeft className="w-5 h-5" />
           </button>
         </Link>
-        <h1 className="text-xl font-bold text-white">Pre-Departure Check</h1>
+        <h1 className="text-xl font-bold text-white">Verificare Pre-Plecare</h1>
       </div>
 
       {/* No vehicle assigned */}
@@ -48,14 +48,14 @@ export default async function NewChecklistPage() {
             <Truck className="w-8 h-8 text-slate-500" />
           </div>
           <div>
-            <p className="font-bold text-white text-lg">No Vehicle Assigned</p>
+            <p className="font-bold text-white text-lg">Niciun vehicul alocat</p>
             <p className="text-sm text-slate-400 mt-1 max-w-xs mx-auto">
-              Your fleet manager needs to assign a vehicle to your account before you can start a checklist.
+              Managerul flotei trebuie să îți aloce un vehicul înainte de a putea începe un checklist.
             </p>
           </div>
           <Link href="/dashboard">
             <button className="mt-2 px-5 py-2.5 rounded-xl bg-surface-700 text-white text-sm font-semibold hover:bg-surface-600 transition-colors">
-              Back to Dashboard
+              Înapoi la Panou
             </button>
           </Link>
         </Card>

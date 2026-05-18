@@ -44,7 +44,7 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
   async function handleSaveDetails(e: React.FormEvent) {
     e.preventDefault();
     if (!plateNumber.trim() || !model.trim()) {
-      toast.error("Plate number and model are required");
+      toast.error("Numărul de înmatriculare și modelul sunt obligatorii");
       return;
     }
     setSavingDetails(true);
@@ -58,7 +58,7 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
       toast.error(error.message);
       return;
     }
-    toast.success("Vehicle details updated");
+    toast.success("Detalii vehicul actualizate");
     router.refresh();
   }
 
@@ -84,7 +84,7 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
 
     setSavingDriver(false);
     if (error) { toast.error(error.message); return; }
-    toast.success(assignedDriverId ? "Driver assigned" : "Driver unassigned");
+    toast.success(assignedDriverId ? "Șofer alocat" : "Șofer dealocat");
     router.refresh();
   }
 
@@ -96,7 +96,7 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
     const { error } = await supabase.from("vehicles").delete().eq("id", vehicle.id);
     setDeleting(false);
     if (error) { toast.error(error.message); return; }
-    toast.success("Vehicle deleted");
+    toast.success("Vehicul șters");
     router.push("/admin/vehicles");
   }
 
@@ -107,7 +107,7 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
         className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm w-fit"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Vehicles
+        Înapoi la Vehicule
       </Link>
 
       <div>
@@ -121,25 +121,25 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
           <div className="w-9 h-9 rounded-xl bg-emerald-500/15 flex items-center justify-center">
             <Truck className="w-4 h-4 text-emerald-400" />
           </div>
-          <p className="font-semibold text-white text-sm">Vehicle Details</p>
+          <p className="font-semibold text-white text-sm">Detalii vehicul</p>
         </div>
         <form onSubmit={handleSaveDetails} className="flex flex-col gap-3">
           <Input
-            label="Plate Number"
+            label="Număr înmatriculare"
             value={plateNumber}
             onChange={(e) => setPlateNumber(e.target.value.toUpperCase())}
             leftIcon={<Hash className="w-4 h-4" />}
             autoCapitalize="characters"
           />
           <Input
-            label="Vehicle Model"
+            label="Model vehicul"
             value={model}
             onChange={(e) => setModel(e.target.value)}
             leftIcon={<Truck className="w-4 h-4" />}
           />
           <Button type="submit" variant="primary" size="sm" loading={savingDetails} className="gap-2 self-start">
             <Save className="w-3.5 h-3.5" />
-            Save Details
+            Salvează detaliile
           </Button>
         </form>
       </Card>
@@ -151,13 +151,13 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
             <User className="w-4 h-4 text-brand-400" />
           </div>
           <div>
-            <p className="font-semibold text-white text-sm">Assigned Driver</p>
-            <p className="text-xs text-slate-400">Only this driver will see the vehicle</p>
+            <p className="font-semibold text-white text-sm">Șofer alocat</p>
+            <p className="text-xs text-slate-400">Doar acest șofer va vedea vehiculul</p>
           </div>
         </div>
         <form onSubmit={handleSaveDriver} className="flex flex-col gap-3">
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-slate-300">Driver</label>
+            <label className="text-sm font-medium text-slate-300">Șofer</label>
             <select
               value={assignedDriverId ?? ""}
               onChange={(e) => setAssignedDriverId(e.target.value || null)}
@@ -165,7 +165,7 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
                 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500
                 transition-colors appearance-none cursor-pointer"
             >
-              <option value="">— No driver assigned —</option>
+              <option value="">— Niciun șofer alocat —</option>
               {drivers.map((d) => (
                 <option key={d.id} value={d.id}>
                   {d.full_name || d.email}
@@ -175,17 +175,17 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
           </div>
           <Button type="submit" variant="primary" size="sm" loading={savingDriver} className="gap-2 self-start">
             <User className="w-3.5 h-3.5" />
-            Save Assignment
+            Salvează alocarea
           </Button>
         </form>
       </Card>
 
       {/* ── Danger Zone ── */}
       <Card className="flex flex-col gap-3 border-red-900/40">
-        <p className="font-semibold text-red-400 text-sm">Danger Zone</p>
+        <p className="font-semibold text-red-400 text-sm">Zonă periculoasă</p>
         <p className="text-xs text-slate-400">
-          Deleting this vehicle will unassign it from any driver. Checklists referencing
-          this vehicle will be kept but the vehicle field will be cleared.
+          Ștergerea acestui vehicul îl va dealoca de la orice șofer. Checklist-urile care fac
+          referire la acest vehicul vor fi păstrate dar câmpul vehicul va fi golit.
         </p>
         <Button
           type="button"
@@ -196,14 +196,14 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
           className="gap-2 self-start"
         >
           <Trash2 className="w-3.5 h-3.5" />
-          {confirmDelete ? "Confirm Delete" : "Delete Vehicle"}
+          {confirmDelete ? "Confirmă ștergerea" : "Șterge Vehiculul"}
         </Button>
         {confirmDelete && !deleting && (
           <button
             onClick={() => setConfirmDelete(false)}
             className="text-xs text-slate-400 hover:text-slate-300 self-start"
           >
-            Cancel
+            Anulează
           </button>
         )}
       </Card>

@@ -48,21 +48,21 @@ export default function SettingsPage() {
       .update({ full_name: fullName.trim(), updated_at: new Date().toISOString() })
       .eq("id", user.id);
 
-    if (error) toast.error("Failed to save");
-    else toast.success("Profile updated");
+    if (error) toast.error("Salvarea a eșuat");
+    else toast.success("Profil actualizat");
     setSaving(false);
   }
 
   async function handleSignOut() {
     const supabase = createClient();
     await supabase.auth.signOut();
-    toast.success("Signed out");
+    toast.success("Deconectat");
     router.push("/auth/login");
   }
 
   return (
     <div className="flex flex-col gap-5 max-w-lg">
-      <h1 className="text-xl font-bold text-white">Settings</h1>
+      <h1 className="text-xl font-bold text-white">Setări</h1>
 
       {/* Profile */}
       <Card className="flex flex-col gap-4">
@@ -71,14 +71,14 @@ export default function SettingsPage() {
             <User className="w-5 h-5 text-brand-400" />
           </div>
           <div>
-            <p className="font-semibold text-white text-sm">Profile</p>
+            <p className="font-semibold text-white text-sm">Profil</p>
             <p className="text-xs text-slate-400 capitalize">{role}</p>
           </div>
         </div>
 
         <form onSubmit={handleSave} className="flex flex-col gap-3">
           <Input
-            label="Full Name"
+            label="Nume complet"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             disabled={loading}
@@ -90,7 +90,7 @@ export default function SettingsPage() {
             className="opacity-60 cursor-not-allowed"
           />
           <Button type="submit" variant="primary" loading={saving} disabled={loading}>
-            Save Changes
+            Salvează modificările
           </Button>
         </form>
       </Card>
@@ -99,14 +99,14 @@ export default function SettingsPage() {
       <Card className="flex flex-col gap-3">
         <div className="flex items-center gap-3">
           <Shield className="w-5 h-5 text-brand-400" />
-          <p className="font-semibold text-white text-sm">App Info</p>
+          <p className="font-semibold text-white text-sm">Informații aplicație</p>
         </div>
         <div className="flex items-center justify-between py-1 border-t border-surface-700">
-          <span className="text-sm text-slate-400">Version</span>
+          <span className="text-sm text-slate-400">Versiune</span>
           <span className="text-sm text-white font-medium">0.1.0</span>
         </div>
         <div className="flex items-center justify-between py-1 border-t border-surface-700">
-          <span className="text-sm text-slate-400">Platform</span>
+          <span className="text-sm text-slate-400">Platformă</span>
           <span className="text-sm text-white font-medium">PWA</span>
         </div>
       </Card>
@@ -114,7 +114,7 @@ export default function SettingsPage() {
       {/* Sign out */}
       <Button variant="danger" size="lg" fullWidth onClick={handleSignOut}>
         <LogOut className="w-4 h-4" />
-        Sign Out
+        Deconectare
       </Button>
     </div>
   );
