@@ -1,0 +1,357 @@
+{
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/postcss.config.mjs": {
+    "mtime": 1779113876.5805984,
+    "ast_hash": "d3fd1d29b05a09ff76b595a70e1e7d50",
+    "semantic_hash": "d3fd1d29b05a09ff76b595a70e1e7d50"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/tailwind.config.ts": {
+    "mtime": 1779113873.8694727,
+    "ast_hash": "bff5ac47c047d609cddcf38880f2e44e",
+    "semantic_hash": "bff5ac47c047d609cddcf38880f2e44e"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/supabase-schema.sql": {
+    "mtime": 1779115580.9239435,
+    "ast_hash": "ec3bd428e64dbfc352c6345b0a65a545",
+    "semantic_hash": "ec3bd428e64dbfc352c6345b0a65a545"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/package.json": {
+    "mtime": 1779113864.981822,
+    "ast_hash": "43c4b54dc9206068bdbc5622acb3efc7",
+    "semantic_hash": "43c4b54dc9206068bdbc5622acb3efc7"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/supabase-migration-incidents-v2.sql": {
+    "mtime": 1779116007.8223095,
+    "ast_hash": "38677a60b5def1d2b52d129a9e3ab420",
+    "semantic_hash": "38677a60b5def1d2b52d129a9e3ab420"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/supabase-migration-checklist-v2.sql": {
+    "mtime": 1779115588.6057682,
+    "ast_hash": "d524eebc90d102dc97fce8345a66418f",
+    "semantic_hash": "d524eebc90d102dc97fce8345a66418f"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/tsconfig.json": {
+    "mtime": 1779113868.688354,
+    "ast_hash": "3e33ec9d7723b85fb54e9110927d0c7a",
+    "semantic_hash": "3e33ec9d7723b85fb54e9110927d0c7a"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/next.config.ts": {
+    "mtime": 1779113883.9739354,
+    "ast_hash": "c6047863ed885f91ecb78a2221079e80",
+    "semantic_hash": "c6047863ed885f91ecb78a2221079e80"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/public/manifest.json": {
+    "mtime": 1779114144.8152862,
+    "ast_hash": "9160561028792b22b66a87258e0750b3",
+    "semantic_hash": "9160561028792b22b66a87258e0750b3"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/middleware.ts": {
+    "mtime": 1779114856.559036,
+    "ast_hash": "07f138d1c595bd8b6b9fcd2d3442dfa6",
+    "semantic_hash": "07f138d1c595bd8b6b9fcd2d3442dfa6"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/types/database.ts": {
+    "mtime": 1779116022.2955515,
+    "ast_hash": "d342f01c9f76ec089796dd0ed8b371de",
+    "semantic_hash": "d342f01c9f76ec089796dd0ed8b371de"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/layout.tsx": {
+    "mtime": 1779113958.8879855,
+    "ast_hash": "d1c8952c10cc6e060b291c395202a6b3",
+    "semantic_hash": "d1c8952c10cc6e060b291c395202a6b3"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/error.tsx": {
+    "mtime": 1779114196.3022096,
+    "ast_hash": "ea119ab1a18f81019987b594268f47c4",
+    "semantic_hash": "ea119ab1a18f81019987b594268f47c4"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/page.tsx": {
+    "mtime": 1779113961.812268,
+    "ast_hash": "353602d98885378b30eae5770470732e",
+    "semantic_hash": "353602d98885378b30eae5770470732e"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/auth/loading.tsx": {
+    "mtime": 1779114191.0467582,
+    "ast_hash": "da4e5d1ae85980fadafb1a1b3b41d357",
+    "semantic_hash": "da4e5d1ae85980fadafb1a1b3b41d357"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/auth/register/page.tsx": {
+    "mtime": 1779114877.144556,
+    "ast_hash": "3a70b28ea4a80ba1eee701408fdeedd8",
+    "semantic_hash": "3a70b28ea4a80ba1eee701408fdeedd8"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/auth/login/page.tsx": {
+    "mtime": 1779114014.5042303,
+    "ast_hash": "4f087368c33ef601ca666557f28dc2b5",
+    "semantic_hash": "4f087368c33ef601ca666557f28dc2b5"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/ProtectedLayoutClient.tsx": {
+    "mtime": 1779113998.3085594,
+    "ast_hash": "7b565ddf7f7ea79f8a3b53a0069df5e2",
+    "semantic_hash": "7b565ddf7f7ea79f8a3b53a0069df5e2"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/layout.tsx": {
+    "mtime": 1779114227.3012164,
+    "ast_hash": "4fc9d7bb516083696c88404d356ec4a8",
+    "semantic_hash": "4fc9d7bb516083696c88404d356ec4a8"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/loading.tsx": {
+    "mtime": 1779114187.6903272,
+    "ast_hash": "da4e5d1ae85980fadafb1a1b3b41d357",
+    "semantic_hash": "da4e5d1ae85980fadafb1a1b3b41d357"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/settings/page.tsx": {
+    "mtime": 1779114136.2869732,
+    "ast_hash": "18d46be9f66817a39123ca5ba8f93f96",
+    "semantic_hash": "18d46be9f66817a39123ca5ba8f93f96"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/drivers/page.tsx": {
+    "mtime": 1779114968.277394,
+    "ast_hash": "be489dbad8d935e0a358ba9038d804ff",
+    "semantic_hash": "be489dbad8d935e0a358ba9038d804ff"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/checklists/page.tsx": {
+    "mtime": 1779115777.2781374,
+    "ast_hash": "47faf500be6dd94569d83fcddc30ef3f",
+    "semantic_hash": "47faf500be6dd94569d83fcddc30ef3f"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/checklists/new/page.tsx": {
+    "mtime": 1779115714.7632728,
+    "ast_hash": "378d87def78171d2bd31dfa69802193c",
+    "semantic_hash": "378d87def78171d2bd31dfa69802193c"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/checklists/[id]/page.tsx": {
+    "mtime": 1779115762.132836,
+    "ast_hash": "ee8ef8c9edced32fb99ce498bd2bf479",
+    "semantic_hash": "ee8ef8c9edced32fb99ce498bd2bf479"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/layout.tsx": {
+    "mtime": 1779114675.4794936,
+    "ast_hash": "adf93ccde65d3e4b30ec1ac3fd9fcc3d",
+    "semantic_hash": "adf93ccde65d3e4b30ec1ac3fd9fcc3d"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/audit-logs/AuditExportWrapper.tsx": {
+    "mtime": 1779116642.465301,
+    "ast_hash": "0f450ffbb89f88523d0c7428f65b3c8f",
+    "semantic_hash": "0f450ffbb89f88523d0c7428f65b3c8f"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/audit-logs/page.tsx": {
+    "mtime": 1779128273.9872115,
+    "ast_hash": "1d2d9eaa9ed7a973e25680c11d3bc8b4",
+    "semantic_hash": "1d2d9eaa9ed7a973e25680c11d3bc8b4"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/drivers/page.tsx": {
+    "mtime": 1779114690.971364,
+    "ast_hash": "5604cb7e85795dbf767b3e4cfef961d9",
+    "semantic_hash": "5604cb7e85795dbf767b3e4cfef961d9"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/drivers/new/page.tsx": {
+    "mtime": 1779114715.8949778,
+    "ast_hash": "c1475a401abae3e44efd55abd942dbb9",
+    "semantic_hash": "c1475a401abae3e44efd55abd942dbb9"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/drivers/[id]/EditDriverForm.tsx": {
+    "mtime": 1779114757.1490664,
+    "ast_hash": "2b2e4170bfae12a836cc75410cadb236",
+    "semantic_hash": "2b2e4170bfae12a836cc75410cadb236"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/drivers/[id]/page.tsx": {
+    "mtime": 1779114722.705707,
+    "ast_hash": "17a30fbee87be2dfe76f86e951cbdb8f",
+    "semantic_hash": "17a30fbee87be2dfe76f86e951cbdb8f"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/checklists/ChecklistsExportWrapper.tsx": {
+    "mtime": 1779116574.867957,
+    "ast_hash": "d2fd64fca6dc194d251be6c0ee3e46aa",
+    "semantic_hash": "d2fd64fca6dc194d251be6c0ee3e46aa"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/checklists/page.tsx": {
+    "mtime": 1779128354.9557233,
+    "ast_hash": "9583b072ca7ff3a4489b7c046ddb99f0",
+    "semantic_hash": "9583b072ca7ff3a4489b7c046ddb99f0"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/vehicles/page.tsx": {
+    "mtime": 1779114785.8641784,
+    "ast_hash": "33badc144d5d449f73408ee0ab135dfb",
+    "semantic_hash": "33badc144d5d449f73408ee0ab135dfb"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/vehicles/new/page.tsx": {
+    "mtime": 1779114798.9027507,
+    "ast_hash": "53fa5d0613d6d09dfe0f5874ebb9ff47",
+    "semantic_hash": "53fa5d0613d6d09dfe0f5874ebb9ff47"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/vehicles/[id]/EditVehicleForm.tsx": {
+    "mtime": 1779114830.4442906,
+    "ast_hash": "09f275311fcdf09c6e44170f1389e539",
+    "semantic_hash": "09f275311fcdf09c6e44170f1389e539"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/vehicles/[id]/page.tsx": {
+    "mtime": 1779114804.0559752,
+    "ast_hash": "9015a21e9df9899d7c59c5640dc851b9",
+    "semantic_hash": "9015a21e9df9899d7c59c5640dc851b9"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/incidents/page.tsx": {
+    "mtime": 1779116603.9391196,
+    "ast_hash": "51c0618874b9f5b468510990e28cd821",
+    "semantic_hash": "51c0618874b9f5b468510990e28cd821"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/admin/incidents/IncidentsExportWrapper.tsx": {
+    "mtime": 1779116607.1358497,
+    "ast_hash": "0dbbfaa8b0fa2bc57b1d4529e68ee3d6",
+    "semantic_hash": "0dbbfaa8b0fa2bc57b1d4529e68ee3d6"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/dashboard/DriverDashboard.tsx": {
+    "mtime": 1779115461.3636003,
+    "ast_hash": "af0a692ad25ca463ef8bed8cae6f92bd",
+    "semantic_hash": "af0a692ad25ca463ef8bed8cae6f92bd"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/dashboard/page.tsx": {
+    "mtime": 1779116438.747403,
+    "ast_hash": "c67ab9e07e018349c32ac1ff9d4fbcf0",
+    "semantic_hash": "c67ab9e07e018349c32ac1ff9d4fbcf0"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/dashboard/AdminDashboard.tsx": {
+    "mtime": 1779116482.9101436,
+    "ast_hash": "ed474b73a8097b5ddf7725b788e79baa",
+    "semantic_hash": "ed474b73a8097b5ddf7725b788e79baa"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/incidents/page.tsx": {
+    "mtime": 1779116133.8620377,
+    "ast_hash": "def75dcbf6eb6a45c77a25fe869ef09c",
+    "semantic_hash": "def75dcbf6eb6a45c77a25fe869ef09c"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/incidents/new/page.tsx": {
+    "mtime": 1779116212.8027291,
+    "ast_hash": "4c52cd3e73ee33e656b6465bc4a466d0",
+    "semantic_hash": "4c52cd3e73ee33e656b6465bc4a466d0"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/incidents/[id]/page.tsx": {
+    "mtime": 1779128455.4976752,
+    "ast_hash": "671c766cab726a482b8951632856bdff",
+    "semantic_hash": "671c766cab726a482b8951632856bdff"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/api/admin/users/route.ts": {
+    "mtime": 1779114661.067234,
+    "ast_hash": "58e609d59764ebc3cd393b5daa67de15",
+    "semantic_hash": "58e609d59764ebc3cd393b5daa67de15"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/ui/Card.tsx": {
+    "mtime": 1779113929.4102468,
+    "ast_hash": "2e15e1972e6aedddbea17ecc8e9950d3",
+    "semantic_hash": "2e15e1972e6aedddbea17ecc8e9950d3"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/ui/Badge.tsx": {
+    "mtime": 1779113938.9635122,
+    "ast_hash": "cd504920009ddddba07f3d5086a3c50d",
+    "semantic_hash": "cd504920009ddddba07f3d5086a3c50d"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/ui/Button.tsx": {
+    "mtime": 1779113919.4731798,
+    "ast_hash": "ba43c21e9426f358e5e9df2e2f3235a3",
+    "semantic_hash": "ba43c21e9426f358e5e9df2e2f3235a3"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/ui/Spinner.tsx": {
+    "mtime": 1779113934.3713987,
+    "ast_hash": "dc6671e130414b5da153f93b152428ec",
+    "semantic_hash": "dc6671e130414b5da153f93b152428ec"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/ui/Input.tsx": {
+    "mtime": 1779113925.4412398,
+    "ast_hash": "a76c3805465545d79df1fd61e15ca6d9",
+    "semantic_hash": "a76c3805465545d79df1fd61e15ca6d9"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/layout/TopBar.tsx": {
+    "mtime": 1779113987.7613428,
+    "ast_hash": "47d95a0d67cbb1666297fc3c779a8949",
+    "semantic_hash": "47d95a0d67cbb1666297fc3c779a8949"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/layout/BottomNav.tsx": {
+    "mtime": 1779128056.2919185,
+    "ast_hash": "ca9beec0b6e8c09430e9bff4adb2f906",
+    "semantic_hash": "ca9beec0b6e8c09430e9bff4adb2f906"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/layout/Sidebar.tsx": {
+    "mtime": 1779128073.9915795,
+    "ast_hash": "778b2059a7fe2fddd21a57c7a5dfc377",
+    "semantic_hash": "778b2059a7fe2fddd21a57c7a5dfc377"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/admin/ExportButton.tsx": {
+    "mtime": 1779127704.8886414,
+    "ast_hash": "e7ca29f8d35fc7f8676cd58270fc12f2",
+    "semantic_hash": "e7ca29f8d35fc7f8676cd58270fc12f2"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/admin/AdminFilterBar.tsx": {
+    "mtime": 1779116514.1356711,
+    "ast_hash": "86dc8c52da39b5c4526fef01a22d4513",
+    "semantic_hash": "86dc8c52da39b5c4526fef01a22d4513"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/components/checklist/ChecklistWizard.tsx": {
+    "mtime": 1779115836.7277324,
+    "ast_hash": "f6b2164506a7c4e015874034e5dbcf56",
+    "semantic_hash": "f6b2164506a7c4e015874034e5dbcf56"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/lib/supabase/admin.ts": {
+    "mtime": 1779114589.0399482,
+    "ast_hash": "dc9983153c1b17fa5a16af61cc0b24e7",
+    "semantic_hash": "dc9983153c1b17fa5a16af61cc0b24e7"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/lib/supabase/client.ts": {
+    "mtime": 1779113895.693319,
+    "ast_hash": "5bd9d7a03d312df0bdebb54bd77e5e8f",
+    "semantic_hash": "5bd9d7a03d312df0bdebb54bd77e5e8f"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/lib/supabase/server.ts": {
+    "mtime": 1779113899.2336128,
+    "ast_hash": "a0f4394aae952c614c141a308b6f8749",
+    "semantic_hash": "a0f4394aae952c614c141a308b6f8749"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/SETUP.md": {
+    "mtime": 1779114207.5605514,
+    "ast_hash": "1ea38ec6ade035f3e11ba8152cedac19",
+    "semantic_hash": "1ea38ec6ade035f3e11ba8152cedac19"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/public/icons/apple-touch-icon.png": {
+    "mtime": 1779114158.2870872,
+    "ast_hash": "4807c9e8b6cc1aaa443f276b4f3ed85d",
+    "semantic_hash": "4807c9e8b6cc1aaa443f276b4f3ed85d"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/public/icons/icon-192.png": {
+    "mtime": 1779114158.243278,
+    "ast_hash": "e6aa8a97d7636ab1dcb0b8439ca7c2cf",
+    "semantic_hash": "e6aa8a97d7636ab1dcb0b8439ca7c2cf"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/public/icons/icon-384.png": {
+    "mtime": 1779114158.2572193,
+    "ast_hash": "506c5e43bd7b4f089e786aa06dd292c0",
+    "semantic_hash": "506c5e43bd7b4f089e786aa06dd292c0"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/public/icons/icon-72.png": {
+    "mtime": 1779114158.2228477,
+    "ast_hash": "aa25ca13a584a57f454fc45dbc419526",
+    "semantic_hash": "aa25ca13a584a57f454fc45dbc419526"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/public/icons/icon-96.png": {
+    "mtime": 1779114158.228505,
+    "ast_hash": "657945da6b7b1b5c62bb1088dceacc28",
+    "semantic_hash": "657945da6b7b1b5c62bb1088dceacc28"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/public/icons/icon-128.png": {
+    "mtime": 1779114158.2358315,
+    "ast_hash": "065a3196dd9567fa9b283d17c0757682",
+    "semantic_hash": "065a3196dd9567fa9b283d17c0757682"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/public/icons/icon-512.png": {
+    "mtime": 1779114158.2784123,
+    "ast_hash": "1254b94a80c0c69dba2a8417a0743024",
+    "semantic_hash": "1254b94a80c0c69dba2a8417a0743024"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/src/app/(protected)/incidents/[id]/IncidentStatusActions.tsx": {
+    "mtime": 1779128438.953177,
+    "ast_hash": "4d65eb0b93bb48ed5a001cc7c4ff9122",
+    "semantic_hash": "4d65eb0b93bb48ed5a001cc7c4ff9122"
+  },
+  "/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/CLAUDE.md": {
+    "mtime": 1779126148.7194414,
+    "ast_hash": "a2c330e68852a68196687635592d64c5",
+    "semantic_hash": "a2c330e68852a68196687635592d64c5"
+  }
+}

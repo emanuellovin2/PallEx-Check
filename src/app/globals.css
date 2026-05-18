@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-surface-950 text-white;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    /* Prevent pull-to-refresh interfering with swipe gestures */
+    overscroll-behavior-y: contain;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  /* Safe area insets for iOS notch / home bar */
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Remove iOS input shadows */
+  input, textarea, select {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* Prevent text size adjustment on orientation change */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+  .safe-top {
+    padding-top: max(0px, env(safe-area-inset-top));
+  }
+
+  /* Fraud signal pulse ring */
+  .ring-fraud {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    animation: fraud-ring 2s ease-in-out infinite;
+  }
+
+  /* Tap-safe full-area button */
+  .touch-target {
+    @apply min-h-[56px] touch-manipulation select-none;
+  }
+
+  /* Status bar colour for PWA */
+  .status-bar-height {
+    height: env(safe-area-inset-top);
+  }
+}
+
+@keyframes fraud-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.35); }
+  70%  { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}

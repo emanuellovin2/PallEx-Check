@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm list *)",
+      "Bash(npx tsc *)",
+      "Bash(grep -v \"^$\")",
+      "Bash(npm run *)",
+      "Bash(node -e \"require\\('is-extglob'\\)\")",
+      "Bash(cat \"/Users/lovinemanuel/.npm/_logs/2026-05-18T18_41_26_419Z-debug-0.log\" 2>/dev/null | grep \"Invalid Version\" -A 5 | head -20)",
+      "Bash(node -e \"require\\('./node_modules/is-extglob'\\)\")",
+      "Bash(node -e \"require\\('./node_modules/next-pwa'\\)\")",
+      "Bash(node -c)",
+      "Bash(node -e ' *)",
+      "Bash(npm cache *)",
+      "Read(//private/tmp/lodash_fix/**)",
+      "Bash(tar -xzf lodash.debounce-4.0.8.tgz)",
+      "Bash(cp package/index.js \"/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/node_modules/lodash.debounce/index.js\")",
+      "Bash(tar -xzf upath-1.2.0.tgz)",
+      "Bash(cp -r package/build \"/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/node_modules/upath/\")",
+      "Bash(yarn --version)",
+      "Bash(node -e \"const s = require\\('/usr/local/lib/node_modules/npm/node_modules/semver'\\); console.log\\(s.valid\\('0.17.0'\\)\\)\")",
+      "Bash(xargs node -e ' *)",
+      "Bash(pnpm --version)",
+      "Bash(bun --version)",
+      "Bash(npx --yes npm@10 install --prefix \"/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check\")",
+      "Bash(npx --yes npm@9 install --prefix \"/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check\")",
+      "Bash(tar -xzf *.tgz)",
+      "Bash(cp -r package/* \"/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/node_modules/autoprefixer/\")",
+      "Bash(npm info *)",
+      "Bash(node -e \"require\\('/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/node_modules/autoprefixer'\\)\")",
+      "Bash(file \"/Users/lovinemanuel/Desktop/PallEx Check/PallEx Check/public/icons/\"*.png)",
+      "Bash(grep -v \"^[A-Z][a-z]*$\")",
+      "Bash(grep -v \"^[0-9]*$\")",
+      "Bash(grep -v \"^\\\\s*$\")",
+      "Bash(grep -v \"^[a-z]*[0-9]*$\")",
+      "Bash(iconv -f mac -t utf-8)"
+    ]
+  }
+}
