@@ -469,7 +469,8 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
         .single();
 
       if (clErr || !checklist) {
-        toast.error("Eroare la crearea checklist-ului. Încearcă din nou.");
+        console.error("[ChecklistWizard] checklist insert error:", clErr);
+        toast.error(`Eroare la crearea checklist-ului: ${clErr?.message ?? "necunoscută"}`);
         return;
       }
 
@@ -519,7 +520,8 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
       });
 
       if (chkErr) {
-        toast.error("Eroare la salvarea verificărilor. Încearcă din nou.");
+        console.error("[ChecklistWizard] checklist_checks insert error:", chkErr);
+        toast.error(`Eroare la salvarea verificărilor: ${chkErr.message}`);
         await supabase.from("checklists").delete().eq("id", checklist.id);
         return;
       }
@@ -531,7 +533,8 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
         .eq("id", checklist.id);
 
       if (submitErr) {
-        toast.error("Eroare la trimiterea checklist-ului. Încearcă din nou.");
+        console.error("[ChecklistWizard] checklist submit (status update) error:", submitErr);
+        toast.error(`Eroare la trimiterea checklist-ului: ${submitErr.message}`);
         return;
       }
 
@@ -551,7 +554,8 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
 
       toast.success("Checklist trimis și blocat ✓");
       router.push(`/dashboard?pts=10&reason=Checklist+trimis`);
-    } catch {
+    } catch (err) {
+      console.error("[ChecklistWizard] unexpected error:", err);
       toast.error("Eroare neașteptată. Încearcă din nou.");
     } finally {
       setSubmitting(false);
