@@ -2,20 +2,31 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
-import { User, LogOut, Bell, Shield } from "lucide-react";
+import { User, LogOut, Shield, Sun, Moon, Monitor } from "lucide-react";
+
+const THEMES = [
+  { value: "dark", label: "Întunecat", icon: Moon },
+  { value: "light", label: "Luminos", icon: Sun },
+  { value: "system", label: "Sistem", icon: Monitor },
+] as const;
 
 export default function SettingsPage() {
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     (async () => {
@@ -93,6 +104,41 @@ export default function SettingsPage() {
             Salvează modificările
           </Button>
         </form>
+      </Card>
+
+      {/* Theme */}
+      <Card className="flex flex-col gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-brand-500/15 flex items-center justify-center">
+            {mounted && theme === "light"
+              ? <Sun className="w-5 h-5 text-brand-400" />
+              : <Moon className="w-5 h-5 text-brand-400" />}
+          </div>
+          <div>
+            <p className="font-semibold text-white text-sm">Temă</p>
+            <p className="text-xs text-slate-400">Aspectul aplicației</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          {THEMES.map(({ value, label, icon: Icon }) => {
+            const active = mounted && theme === value;
+            return (
+              <button
+                key={value}
+                onClick={() => setTheme(value)}
+                className={[
+                  "flex flex-col items-center gap-2 rounded-xl py-3 px-2 transition-all border",
+                  active
+                    ? "bg-brand-500/20 border-brand-500/50 text-brand-400"
+                    : "bg-surface-700 border-surface-600 text-surface-400 active:bg-surface-600",
+                ].join(" ")}
+              >
+                <Icon className="w-5 h-5" />
+                <span className="text-xs font-medium">{label}</span>
+              </button>
+            );
+          })}
+        </div>
       </Card>
 
       {/* App info */}
