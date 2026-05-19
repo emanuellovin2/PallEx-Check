@@ -4,6 +4,28 @@ export type ChecklistStatus = "draft" | "submitted";
 export type IncidentSeverity = "low" | "medium" | "high" | "critical";
 export type IncidentStatus = "open" | "reviewing" | "resolved" | "closed";
 export type PhotoType = "front" | "back" | "side" | "damage" | "pre_check" | "post_check" | "other";
+export type VehicleDocType =
+  | "rca"
+  | "carte_verde"
+  | "itp"
+  | "tahograf"
+  | "revizie_ulei"
+  | "revizie_generala"
+  | "rovinieta"
+  | "licenta_transport"
+  | "cmr";
+
+export const VEHICLE_DOC_LABELS: Record<VehicleDocType, string> = {
+  rca: "RCA",
+  carte_verde: "Carte Verde",
+  itp: "ITP",
+  tahograf: "Tahograf",
+  revizie_ulei: "Revizie Ulei",
+  revizie_generala: "Revizie Generală",
+  rovinieta: "Rovignietă",
+  licenta_transport: "Licență Transport",
+  cmr: "Asigurare CMR",
+};
 
 export type Database = {
   public: {
@@ -213,6 +235,36 @@ export type Database = {
         Update: never;
       };
 
+      vehicle_documents: {
+        Row: {
+          id: string;
+          vehicle_id: string;
+          doc_type: VehicleDocType;
+          label: string;
+          expires_at: string;
+          issued_at: string | null;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          vehicle_id: string;
+          doc_type: VehicleDocType;
+          label: string;
+          expires_at: string;
+          issued_at?: string | null;
+          notes?: string | null;
+        };
+        Update: {
+          doc_type?: VehicleDocType;
+          label?: string;
+          expires_at?: string;
+          issued_at?: string | null;
+          notes?: string | null;
+          updated_at?: string;
+        };
+      };
+
       audit_logs: {
         Row: {
           id: string;
@@ -257,6 +309,7 @@ export type Database = {
       incident_severity: IncidentSeverity;
       incident_status: IncidentStatus;
       photo_type: PhotoType;
+      vehicle_doc_type: VehicleDocType;
     };
   };
 };

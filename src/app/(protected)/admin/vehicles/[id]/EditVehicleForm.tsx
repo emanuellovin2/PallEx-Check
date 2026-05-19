@@ -101,7 +101,7 @@ export function EditVehicleForm({ vehicle, drivers }: Props) {
   }
 
   return (
-    <div className="flex flex-col gap-5 max-w-lg">
+    <div className="flex flex-col gap-5">
       <Link
         href="/admin/vehicles"
         className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm w-fit"
