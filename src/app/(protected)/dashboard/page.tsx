@@ -144,11 +144,12 @@ export default async function DashboardPage() {
     );
   }
 
-  // Driver: get stats + assigned vehicle
+  // Driver: get stats + assigned vehicle + points + leaderboard
   const [
     { count: checklistCount },
     { count: incidentCount },
     { data: vehicle },
+    { data: leaderboard },
   ] = await Promise.all([
     supabase
       .from("checklists")
@@ -163,14 +164,26 @@ export default async function DashboardPage() {
       .select("id, plate_number, model")
       .eq("assigned_driver_id", user.id)
       .single(),
+    supabase
+      .from("driver_leaderboard")
+      .select("driver_id, full_name, email, total_points, rank")
+      .order("rank"),
   ]);
+
+  const myEntry = (leaderboard ?? []).find((e: { driver_id: string }) => e.driver_id === user.id);
+  const totalPoints = (myEntry as { total_points?: number } | undefined)?.total_points ?? 0;
+  const rank = (myEntry as { rank?: number } | undefined)?.rank ?? ((leaderboard?.length ?? 0) + 1);
 
   return (
     <DriverDashboard
       name={name}
+      driverId={user.id}
       checklistCount={checklistCount ?? 0}
       incidentCount={incidentCount ?? 0}
       vehicle={vehicle ?? null}
+      totalPoints={totalPoints}
+      rank={rank}
+      leaderboard={(leaderboard ?? []) as import("@/components/points/Leaderboard").LeaderboardEntry[]}
     />
   );
 }

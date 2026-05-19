@@ -1,5 +1,9 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import {
   Truck,
   Play,
@@ -7,7 +11,11 @@ import {
   ClockIcon,
   LockIcon,
   ChevronRight,
+  Trophy,
 } from "lucide-react";
+import { PointsAnimation } from "@/components/points/PointsAnimation";
+import { Leaderboard, type LeaderboardEntry } from "@/components/points/Leaderboard";
+import { Card } from "@/components/ui/Card";
 
 interface Vehicle {
   id: string;
@@ -17,22 +25,82 @@ interface Vehicle {
 
 interface Props {
   name: string;
+  driverId: string;
   checklistCount: number;
   incidentCount: number;
   vehicle: Vehicle | null;
+  totalPoints: number;
+  rank: number;
+  leaderboard: LeaderboardEntry[];
 }
 
-export function DriverDashboard({ name, checklistCount, incidentCount, vehicle }: Props) {
+function DriverDashboardInner({
+  name,
+  driverId,
+  checklistCount,
+  incidentCount,
+  vehicle,
+  totalPoints,
+  rank,
+  leaderboard,
+}: Props) {
+  const searchParams = useSearchParams();
+  const ptsParam = searchParams.get("pts");
+  const reasonParam = searchParams.get("reason");
+  const ptsEarned = ptsParam ? parseInt(ptsParam) : null;
+
   const hasVehicle = !!vehicle;
 
   return (
     <div className="flex flex-col gap-5 animate-slide-up">
+      {/* Dopamine animation */}
+      {ptsEarned && ptsEarned > 0 && (
+        <PointsAnimation points={ptsEarned} reason={reasonParam ?? undefined} />
+      )}
+
       {/* ── Greeting ── */}
       <div className="pt-1">
         <p className="text-surface-400 text-sm">{getGreeting()}</p>
         <h1 className="text-3xl font-extrabold text-white leading-tight mt-0.5 tracking-tight">
           {name.split(" ")[0]}
         </h1>
+      </div>
+
+      {/* ── Points card ── */}
+      <div
+        className="rounded-2xl p-4 flex items-center gap-4"
+        style={{
+          background: "linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.1) 100%)",
+          border: "1px solid rgba(99,102,241,0.25)",
+        }}
+      >
+        <div className="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+          <Trophy className="w-7 h-7 text-amber-400" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">
+            Punctele tale
+          </p>
+          <div className="flex items-end gap-1.5">
+            <span className="text-3xl font-black text-amber-400 tabular-nums leading-none">
+              {totalPoints}
+            </span>
+            <span className="text-sm text-slate-500 mb-0.5">puncte</span>
+          </div>
+        </div>
+        <div className="flex flex-col items-end gap-1 flex-shrink-0">
+          <div
+            className="px-2.5 py-1 rounded-lg text-xs font-bold"
+            style={{
+              background: rank <= 3 ? "rgba(245,158,11,0.2)" : "rgba(99,102,241,0.15)",
+              color: rank <= 3 ? "#f59e0b" : "#818cf8",
+              border: rank <= 3 ? "1px solid rgba(245,158,11,0.3)" : "1px solid rgba(99,102,241,0.2)",
+            }}
+          >
+            {rank <= 3 ? ["🥇", "🥈", "🥉"][rank - 1] : `#${rank}`}
+          </div>
+          <p className="text-[10px] text-slate-600">clasament</p>
+        </div>
       </div>
 
       {/* ── Assigned Vehicle ── */}
@@ -75,7 +143,7 @@ export function DriverDashboard({ name, checklistCount, incidentCount, vehicle }
         </div>
       </div>
 
-      {/* ── Primary CTA — full-width hero button ── */}
+      {/* ── Primary CTA ── */}
       {hasVehicle ? (
         <Link href="/checklists/new" className="block">
           <HeroButton
@@ -119,25 +187,41 @@ export function DriverDashboard({ name, checklistCount, incidentCount, vehicle }
           />
         </Link>
       </div>
+
+      {/* ── Leaderboard ── */}
+      {leaderboard.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2 px-1">
+            <Trophy className="w-4 h-4 text-amber-400" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              Clasament flotă
+            </span>
+          </div>
+          <Leaderboard
+            entries={leaderboard}
+            currentDriverId={driverId}
+            showNames={false}
+          />
+        </div>
+      )}
     </div>
   );
 }
 
-/* ── Hero button (primary action) ── */
+export function DriverDashboard(props: Props) {
+  return (
+    <Suspense fallback={null}>
+      <DriverDashboardInner {...props} />
+    </Suspense>
+  );
+}
+
+/* ── Hero button ── */
 function HeroButton({
-  icon,
-  label,
-  desc,
-  colorClass,
-  shadowClass,
-  disabled = false,
+  icon, label, desc, colorClass, shadowClass, disabled = false,
 }: {
-  icon: ReactNode;
-  label: string;
-  desc: string;
-  colorClass: string;
-  shadowClass: string;
-  disabled?: boolean;
+  icon: ReactNode; label: string; desc: string;
+  colorClass: string; shadowClass: string; disabled?: boolean;
 }) {
   return (
     <div
@@ -145,8 +229,7 @@ function HeroButton({
         "flex items-center gap-4 rounded-2xl px-6 py-6",
         "transition-all duration-150 select-none touch-manipulation",
         disabled ? "pointer-events-none cursor-not-allowed" : "active:scale-[0.97] cursor-pointer",
-        colorClass,
-        shadowClass,
+        colorClass, shadowClass,
       ].join(" ")}
     >
       <div className="text-white flex-shrink-0">{icon}</div>
@@ -161,17 +244,9 @@ function HeroButton({
 
 /* ── Secondary row button ── */
 function ActionRow({
-  icon,
-  label,
-  desc,
-  iconBg,
-  iconColor,
+  icon, label, desc, iconBg, iconColor,
 }: {
-  icon: ReactNode;
-  label: string;
-  desc: string;
-  iconBg: string;
-  iconColor: string;
+  icon: ReactNode; label: string; desc: string; iconBg: string; iconColor: string;
 }) {
   return (
     <div className="flex items-center gap-4 rounded-2xl px-4 py-4 bg-surface-800 border border-surface-700 active:bg-surface-700 transition-colors touch-manipulation select-none cursor-pointer">
