@@ -3,12 +3,11 @@ import { createClient } from "@/lib/supabase/server";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Truck, Plus, User } from "lucide-react";
+import { Truck, Plus, User, AlertTriangle } from "lucide-react";
 
 export default async function AdminVehiclesPage() {
   const supabase = await createClient();
 
-  // Fetch all vehicles with assigned driver name
   const { data: vehicles } = await supabase
     .from("vehicles")
     .select("id, plate_number, model, assigned_driver_id, created_at")
@@ -25,10 +24,38 @@ export default async function AdminVehiclesPage() {
       .from("profiles")
       .select("id, full_name, email")
       .in("id", driverIds);
-
     driverMap = Object.fromEntries(
       (drivers ?? []).map((d) => [d.id, d.full_name || d.email])
     );
+  }
+
+  // Fetch documents expiring within 30 days or already expired per vehicle
+  const vehicleIds = (vehicles ?? []).map((v) => v.id);
+  let expiryAlertMap: Record<string, { expired: number; warning: number }> = {};
+
+  if (vehicleIds.length) {
+    const { data: docs } = await supabase
+      .from("vehicle_documents")
+      .select("vehicle_id, expires_at")
+      .in("vehicle_id", vehicleIds);
+
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const in30 = new Date(now);
+    in30.setDate(in30.getDate() + 30);
+
+    for (const doc of docs ?? []) {
+      const exp = new Date(doc.expires_at);
+      exp.setHours(0, 0, 0, 0);
+      if (!expiryAlertMap[doc.vehicle_id]) {
+        expiryAlertMap[doc.vehicle_id] = { expired: 0, warning: 0 };
+      }
+      if (exp < now) {
+        expiryAlertMap[doc.vehicle_id].expired++;
+      } else if (exp <= in30) {
+        expiryAlertMap[doc.vehicle_id].warning++;
+      }
+    }
   }
 
   return (
@@ -72,20 +99,48 @@ export default async function AdminVehiclesPage() {
             const driverName = vehicle.assigned_driver_id
               ? driverMap[vehicle.assigned_driver_id]
               : null;
+            const alert = expiryAlertMap[vehicle.id];
+            const hasExpired = alert?.expired > 0;
+            const hasWarning = !hasExpired && alert?.warning > 0;
+
             return (
               <Link key={vehicle.id} href={`/admin/vehicles/${vehicle.id}`}>
                 <Card
                   noPadding
-                  className="flex items-center gap-4 px-4 py-3.5 hover:border-surface-600
-                    active:scale-[0.99] transition-all cursor-pointer"
+                  className={`flex items-center gap-4 px-4 py-3.5 hover:border-surface-600
+                    active:scale-[0.99] transition-all cursor-pointer ${
+                      hasExpired
+                        ? "border-red-900/50 hover:border-red-800/60"
+                        : hasWarning
+                        ? "border-amber-900/50 hover:border-amber-800/60"
+                        : ""
+                    }`}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
-                    <Truck className="w-5 h-5 text-emerald-400" />
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                    hasExpired
+                      ? "bg-red-500/15"
+                      : hasWarning
+                      ? "bg-amber-500/15"
+                      : "bg-emerald-500/15"
+                  }`}>
+                    <Truck className={`w-5 h-5 ${
+                      hasExpired
+                        ? "text-red-400"
+                        : hasWarning
+                        ? "text-amber-400"
+                        : "text-emerald-400"
+                    }`} />
                   </div>
+
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-white text-sm">
-                      {vehicle.plate_number}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="font-medium text-white text-sm">{vehicle.plate_number}</p>
+                      {(hasExpired || hasWarning) && (
+                        <AlertTriangle className={`w-3.5 h-3.5 flex-shrink-0 ${
+                          hasExpired ? "text-red-400" : "text-amber-400"
+                        }`} />
+                      )}
+                    </div>
                     <p className="text-xs text-slate-400">{vehicle.model}</p>
                     {driverName && (
                       <div className="flex items-center gap-1 mt-1">
@@ -93,7 +148,15 @@ export default async function AdminVehiclesPage() {
                         <span className="text-xs text-brand-400">{driverName}</span>
                       </div>
                     )}
+                    {(hasExpired || hasWarning) && (
+                      <p className={`text-xs mt-0.5 ${hasExpired ? "text-red-400" : "text-amber-400"}`}>
+                        {hasExpired
+                          ? `${alert.expired} document${alert.expired !== 1 ? "e" : ""} expirat${alert.expired !== 1 ? "e" : ""}`
+                          : `${alert.warning} document${alert.warning !== 1 ? "e" : ""} expiră în 30 de zile`}
+                      </p>
+                    )}
                   </div>
+
                   <Badge variant={driverName ? "success" : "default"}>
                     {driverName ? "Alocat" : "Disponibil"}
                   </Badge>
