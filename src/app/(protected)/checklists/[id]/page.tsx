@@ -15,8 +15,10 @@ import {
   PenLine,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
+import AdminActions from "./AdminActions";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -62,16 +64,20 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
     .eq("checklist_id", id)
     .single();
 
-  // Fetch photos
-  const { data: photos } = await supabase
+  // Fetch photos and generate signed URLs for private bucket
+  const { data: rawPhotos } = await supabase
     .from("checklist_photos")
     .select("*")
     .eq("checklist_id", id);
+
+  const isAdmin = profile?.role === "admin";
+  const photos = await resolvePhotoUrls(rawPhotos ?? [], isAdmin);
 
   const vehicle = checklist.vehicles as { plate_number: string; model: string } | null;
   const driver = checklist.profiles as { full_name: string; email: string } | null;
   const isLocked = checklist.locked;
   const isSubmitted = checklist.status === "submitted";
+  const reviewStatus = (checklist as Record<string, unknown>).review_status as string | null ?? null;
 
   const SAFETY_FIELDS: [string, string][] = [
     ["tyre_front_left", "Anvelopă față stânga"],
@@ -126,13 +132,25 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
         )}
       </div>
 
+      {/* Admin action buttons */}
+      {isAdmin && (
+        <AdminActions checklistId={id} currentReviewStatus={reviewStatus} />
+      )}
+
       {/* Status + timestamp */}
       <Card noPadding className="overflow-hidden">
         <div className="px-4 py-3 flex items-center justify-between border-b border-surface-700">
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Status</span>
-          <Badge variant={isSubmitted ? "success" : "warning"}>
-            {isSubmitted ? "Trimis" : "Ciornă"}
-          </Badge>
+          <div className="flex items-center gap-2">
+            {reviewStatus && (
+              <Badge variant={reviewStatus === "verified" ? "success" : reviewStatus === "needs_review" ? "warning" : "info"}>
+                {reviewStatus === "verified" ? "Verificat" : reviewStatus === "needs_review" ? "De verificat" : "În așteptare"}
+              </Badge>
+            )}
+            <Badge variant={isSubmitted ? "success" : "warning"}>
+              {isSubmitted ? "Trimis" : "Ciornă"}
+            </Badge>
+          </div>
         </div>
         {checklist.submitted_at && (
           <div className="px-4 py-3 flex items-center gap-2 border-b border-surface-700">
@@ -336,6 +354,45 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
       )}
     </div>
   );
+}
+
+// ── Photo signed-URL resolution ───────────────────────────────────────────────
+
+async function resolvePhotoUrls(
+  photos: Array<{ id: string; url: string; type: string; [key: string]: unknown }>,
+  isAdmin: boolean,
+): Promise<Array<{ id: string; url: string; type: string; [key: string]: unknown }>> {
+  if (photos.length === 0) return photos;
+
+  const adminClient = createAdminClient();
+
+  return Promise.all(
+    photos.map(async (photo) => {
+      const path = extractStoragePath(photo.url, "checklist-photos");
+      if (!path) return photo;
+
+      if (isAdmin) {
+        const { data } = await adminClient.storage
+          .from("checklist-photos")
+          .createSignedUrl(path, 3600);
+        return data?.signedUrl ? { ...photo, url: data.signedUrl } : photo;
+      }
+
+      // Drivers: use regular client signed URL
+      const supabase = await createClient();
+      const { data } = await supabase.storage
+        .from("checklist-photos")
+        .createSignedUrl(path, 3600);
+      return data?.signedUrl ? { ...photo, url: data.signedUrl } : photo;
+    }),
+  );
+}
+
+function extractStoragePath(url: string, bucket: string): string {
+  const marker = `/object/public/${bucket}/`;
+  const idx = url.indexOf(marker);
+  if (idx === -1) return "";
+  return decodeURIComponent(url.slice(idx + marker.length).split("?")[0]);
 }
 
 // ── Small helpers ─────────────────────────────────────────────────────────────
