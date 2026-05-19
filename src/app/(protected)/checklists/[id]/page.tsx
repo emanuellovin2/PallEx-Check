@@ -12,6 +12,7 @@ import {
   XCircle,
   MapPin,
   Clock,
+  PenLine,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Card } from "@/components/ui/Card";
@@ -271,6 +272,27 @@ export default async function ChecklistDetailPage({ params }: PageProps) {
           </div>
         )}
       </Card>
+
+      {/* Signature */}
+      {checks?.signature_data_url && (
+        <>
+          <SectionHeader icon={<PenLine className="w-4 h-4" />} label="Semnătură digitală" />
+          <Card noPadding className="overflow-hidden">
+            <div className="px-4 py-3 border-b border-surface-700 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <span className="text-sm text-emerald-300 font-medium">Semnătură aplicată</span>
+            </div>
+            <div className="p-3 bg-surface-800">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={checks.signature_data_url}
+                alt="Semnătură șofer"
+                className="w-full rounded-lg max-h-32 object-contain bg-surface-900"
+              />
+            </div>
+          </Card>
+        </>
+      )}
 
       {/* Damage */}
       <SectionHeader

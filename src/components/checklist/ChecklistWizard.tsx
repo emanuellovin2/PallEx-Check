@@ -19,7 +19,9 @@ import {
   X,
   Image as ImageIcon,
   WifiOff,
+  PenLine,
 } from "lucide-react";
+import { SignaturePad } from "./SignaturePad";
 import { createClient } from "@/lib/supabase/client";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { savePendingChecklist, fileToPhotoEntry } from "@/lib/offline/db";
@@ -130,6 +132,7 @@ const STEP_LABELS = [
   { icon: ShieldCheck, label: "Siguranță" },
   { icon: Package, label: "Marfă" },
   { icon: AlertTriangle, label: "Daune" },
+  { icon: PenLine, label: "Semnătură" },
   { icon: CheckCircle2, label: "Trimite" },
 ];
 
@@ -316,12 +319,15 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
   const [cargoQty, setCargoQty] = useState("");
   const [cargoNotes, setCargoNotes] = useState("");
 
-  // Step 5 — Damage
+  // Step 4 — Damage
   const [hasDamage, setHasDamage] = useState(false);
   const [damageDesc, setDamageDesc] = useState("");
   const [voiceText, setVoiceText] = useState("");
   const [recording, setRecording] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+
+  // Step 5 — Signature
+  const [signatureDataUrl, setSignatureDataUrl] = useState<string | null>(null);
 
   // ── Validation per step ──
   const canProceed = useCallback((): boolean => {
@@ -331,8 +337,11 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
     if (step === 3) {
       return cargoType.trim().length > 0;
     }
+    if (step === 5) {
+      return !!signatureDataUrl;
+    }
     return true;
-  }, [step, photos, cargoType]);
+  }, [step, photos, cargoType, signatureDataUrl]);
 
   // ── Voice recording ──
   function startVoice() {
@@ -417,6 +426,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
         has_damage: hasDamage,
         damage_description: hasDamage ? damageDesc || null : null,
         damage_voice_text: hasDamage ? voiceText || null : null,
+        signature_data_url: signatureDataUrl,
         photos: photoEntries.filter(Boolean) as Awaited<ReturnType<typeof fileToPhotoEntry>>[],
       });
 
@@ -505,6 +515,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
         has_damage: hasDamage,
         damage_description: hasDamage ? damageDesc || null : null,
         damage_voice_text: hasDamage ? voiceText || null : null,
+        signature_data_url: signatureDataUrl,
       });
 
       if (chkErr) {
@@ -554,6 +565,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
     if (!canProceed()) {
       if (step === 1) toast.error("Captează toate cele 3 poze obligatorii");
       if (step === 3) toast.error("Tipul mărfii este obligatoriu");
+      if (step === 5) toast.error("Semnătura este obligatorie");
       return;
     }
     if (step < totalSteps - 1) setStep((s) => s + 1);
@@ -860,8 +872,23 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
         </div>
       )}
 
-      {/* ── Step 5: Review & Submit ── */}
+      {/* ── Step 5: Signature ── */}
       {step === 5 && (
+        <div className="flex flex-col gap-4">
+          <p className="text-sm text-slate-400 text-center">
+            Semnătura ta confirmă că ai verificat vehiculul și toate datele sunt corecte.
+          </p>
+          <SignaturePad value={signatureDataUrl} onChange={setSignatureDataUrl} />
+          {!signatureDataUrl && (
+            <p className="text-xs text-amber-400 text-center">
+              Semnătura este obligatorie pentru a trimite checklist-ul.
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* ── Step 6: Review & Submit ── */}
+      {step === 6 && (
         <div className="flex flex-col gap-3">
           <Card noPadding className="overflow-hidden">
             {/* Vehicle */}
@@ -909,7 +936,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
               </div>
             </div>
             {/* Damage */}
-            <div className="px-4 py-3 flex items-center gap-3">
+            <div className="px-4 py-3 flex items-center gap-3 border-b border-surface-700">
               <AlertTriangle className={`w-4 h-4 flex-shrink-0 ${hasDamage ? "text-amber-400" : "text-slate-500"}`} />
               <div className="flex-1 min-w-0">
                 <p className="text-xs text-slate-500">Raport daune</p>
@@ -917,6 +944,15 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
                   {hasDamage ? "Daune raportate" : "Fără daune"}
                 </p>
               </div>
+            </div>
+            {/* Signature */}
+            <div className="px-4 py-3 flex items-center gap-3">
+              <PenLine className="w-4 h-4 text-brand-400 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-slate-500">Semnătură</p>
+                <p className="text-sm font-semibold text-emerald-300">Aplicată</p>
+              </div>
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
             </div>
           </Card>
 

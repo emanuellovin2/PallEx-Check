@@ -148,16 +148,19 @@ export type Database = {
           has_damage: boolean | null;
           damage_description: string | null;
           damage_voice_text: string | null;
+          signature_data_url: string | null;
           created_at: string;
           updated_at: string;
         };
         Insert: {
           checklist_id: string;
           notes?: string | null;
+          signature_data_url?: string | null;
           [key: string]: boolean | string | null | undefined;
         };
         Update: {
           notes?: string | null;
+          signature_data_url?: string | null;
           [key: string]: boolean | string | null | undefined;
         };
       };
