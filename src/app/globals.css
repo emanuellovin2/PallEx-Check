@@ -13,6 +13,25 @@
     overscroll-behavior-y: contain;
   }
 
+  /* ── Light mode overrides ── */
+  html.light {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+  html.light body { background-color: #f1f5f9; color: #0f172a; }
+  html.light .bg-surface-950 { background-color: #f1f5f9 !important; }
+  html.light .bg-surface-900 { background-color: #e2e8f0 !important; }
+  html.light .bg-surface-800 { background-color: #ffffff !important; }
+  html.light .bg-surface-700 { background-color: #e2e8f0 !important; }
+  html.light .border-surface-700 { border-color: #cbd5e1 !important; }
+  html.light .border-surface-600 { border-color: #94a3b8 !important; }
+  html.light .text-white { color: #0f172a !important; }
+  html.light .text-surface-400 { color: #475569 !important; }
+  html.light .text-surface-500 { color: #374151 !important; }
+  html.light .text-surface-300 { color: #1e293b !important; }
+  html.light .text-surface-600 { color: #64748b !important; }
+  html.light .min-h-screen { background-color: #f1f5f9; }
+
   * {
     @apply box-border;
   }
