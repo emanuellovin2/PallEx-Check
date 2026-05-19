@@ -550,7 +550,7 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
       } catch { /* audit log failure is non-fatal */ }
 
       toast.success("Checklist trimis și blocat ✓");
-      router.push(`/checklists/${checklist.id}`);
+      router.push(`/dashboard?pts=10&reason=Checklist+trimis`);
     } catch {
       toast.error("Eroare neașteptată. Încearcă din nou.");
     } finally {

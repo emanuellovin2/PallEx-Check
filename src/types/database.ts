@@ -224,6 +224,28 @@ export type Database = {
         };
       };
 
+      point_events: {
+        Row: {
+          id: string;
+          driver_id: string;
+          amount: number;
+          reason: string;
+          source: "checklist" | "admin";
+          reference_id: string | null;
+          awarded_by: string | null;
+          created_at: string;
+        };
+        Insert: {
+          driver_id: string;
+          amount: number;
+          reason: string;
+          source: "checklist" | "admin";
+          reference_id?: string | null;
+          awarded_by?: string | null;
+        };
+        Update: never;
+      };
+
       incident_photos: {
         Row: {
           id: string;
