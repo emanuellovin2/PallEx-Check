@@ -526,31 +526,21 @@ export function ChecklistWizard({ vehicle, driverId }: ChecklistWizardProps) {
         return;
       }
 
-      // 7. Submit (triggers auto-lock via DB trigger)
-      const { error: submitErr } = await supabase
-        .from("checklists")
-        .update({ status: "submitted" })
-        .eq("id", checklist.id);
+      // 7. Submit via RPC (SECURITY DEFINER — bypass trigger/RLS issues)
+      const { data: submitResult, error: submitErr } = await supabase
+        .rpc("submit_checklist", { p_checklist_id: checklist.id });
 
       if (submitErr) {
-        console.error("[ChecklistWizard] checklist submit (status update) error:", submitErr);
+        console.error("[ChecklistWizard] submit_checklist RPC error:", submitErr);
         toast.error(`Eroare la trimiterea checklist-ului: ${submitErr.message}`);
         return;
       }
 
-      // 8. Audit log — non-critical, nu blocăm submit-ul dacă eșuează
-      try {
-        await supabase.rpc("log_audit", {
-          p_action: "submit_checklist",
-          p_entity: "checklists",
-          p_entity_id: checklist.id,
-          p_device_info: {
-            ua: navigator.userAgent,
-            platform: navigator.platform,
-            gps_captured: !!gps,
-          },
-        });
-      } catch { /* audit log failure is non-fatal */ }
+      if (submitResult && !submitResult.ok) {
+        console.error("[ChecklistWizard] submit_checklist returned error:", submitResult.error);
+        toast.error(`Eroare la trimiterea checklist-ului: ${submitResult.error}`);
+        return;
+      }
 
       toast.success("Checklist trimis și blocat ✓");
       router.push(`/dashboard?pts=10&reason=Checklist+trimis`);
