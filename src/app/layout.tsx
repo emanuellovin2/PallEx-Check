@@ -21,7 +21,7 @@ export const metadata: Metadata = {
       { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-touch-icon-v2.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
     shortcut: "/favicon.png",
   },
@@ -49,9 +49,7 @@ export default function RootLayout({
   return (
     <html lang="ro" suppressHydrationWarning>
       <head>
-        {/* Explicit apple-touch-icon — versioned URL busts iOS cache */}
-        <link rel="apple-touch-icon" href="/apple-touch-icon-v2.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-v2.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       </head>
       <body className="min-h-screen bg-surface-950 dark:bg-surface-950 light:bg-surface-50 text-white dark:text-white antialiased">
         <ThemeProvider>
